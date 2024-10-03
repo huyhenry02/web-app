@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->integer('follower_count')->default(0);
             $table->string('platform');
-            $table->enum('status', ['active', 'banned', 'blacklisted'])->default('active');
+            $table->enum('status', ['active', 'banned'])->default('active');
             $table->timestamps();
         });
 
