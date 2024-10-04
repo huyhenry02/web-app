@@ -1,0 +1,52 @@
+[
+    {
+        "user_id": 2,
+        "social_media_link": "https://www.youtube.com/channel/creator2",
+        "address": "456 Elm St, City B",
+        "follower_count": 250000,
+        "platform": "YouTube",
+        "status": "active",
+        "created_at": "2024-10-05 10:05:00",
+        "updated_at": "2024-10-05 10:05:00"
+    },
+    {
+        "user_id": 3,
+        "social_media_link": "https://www.tiktok.com/@creator3",
+        "address": "789 Maple Ave, City C",
+        "follower_count": 80000,
+        "platform": "TikTok",
+        "status": "active",
+        "created_at": "2024-10-05 10:10:00",
+        "updated_at": "2024-10-05 10:10:00"
+    },
+    {
+        "user_id": 4,
+        "social_media_link": "https://www.twitter.com/creator4",
+        "address": "321 Oak St, City D",
+        "follower_count": 30000,
+        "platform": "Twitter",
+        "status": "active",
+        "created_at": "2024-10-05 10:15:00",
+        "updated_at": "2024-10-05 10:15:00"
+    },
+    {
+        "user_id": 5,
+        "social_media_link": "https://www.facebook.com/creator5",
+        "address": "654 Pine St, City E",
+        "follower_count": 5000,
+        "platform": "Facebook",
+        "status": "active",
+        "created_at": "2024-10-05 10:20:00",
+        "updated_at": "2024-10-05 10:20:00"
+    },
+    {
+        "user_id": 6,
+        "social_media_link": "https://www.instagram.com/creator1",
+        "address": "123 Main St, City A",
+        "follower_count": 15000,
+        "platform": "Instagram",
+        "status": "active",
+        "created_at": "2024-10-05 10:00:00",
+        "updated_at": "2024-10-05 10:00:00"
+    }
+]

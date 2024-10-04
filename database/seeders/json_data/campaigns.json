@@ -1,0 +1,67 @@
+[
+    {
+        "name": "Summer Fashion Launch",
+        "description": "A campaign to promote the new summer fashion collection.",
+        "start_date": "2024-07-01",
+        "end_date": "2024-07-31",
+        "status": "completed",
+        "follower_required": 10000,
+        "blacklist_excluded": false,
+        "created_by_id": 1,
+        "updated_by_id": null,
+        "created_at": "2024-06-15 09:00:00",
+        "updated_at": "2024-07-01 10:00:00"
+    },
+    {
+        "name": "Tech Gadget Giveaway",
+        "description": "Promoting the launch of the latest tech gadget with a giveaway contest.",
+        "start_date": "2024-08-10",
+        "end_date": "2024-08-25",
+        "status": "active",
+        "follower_required": 50000,
+        "blacklist_excluded": true,
+        "created_by_id": 1,
+        "updated_by_id": 1,
+        "created_at": "2024-08-01 11:00:00",
+        "updated_at": "2024-08-10 11:30:00"
+    },
+    {
+        "name": "Healthy Living Challenge",
+        "description": "Encouraging followers to participate in a 30-day healthy living challenge.",
+        "start_date": "2024-09-01",
+        "end_date": "2024-09-30",
+        "status": "active",
+        "follower_required": 20000,
+        "blacklist_excluded": false,
+        "created_by_id": 1,
+        "updated_by_id": null,
+        "created_at": "2024-08-15 10:00:00",
+        "updated_at": "2024-09-01 09:00:00"
+    },
+    {
+        "name": "Autumn Photography Contest",
+        "description": "A photography contest for capturing the beauty of autumn.",
+        "start_date": "2024-10-01",
+        "end_date": "2024-10-15",
+        "status": "pending",
+        "follower_required": 15000,
+        "blacklist_excluded": false,
+        "created_by_id": 1,
+        "updated_by_id": null,
+        "created_at": "2024-09-20 12:00:00",
+        "updated_at": null
+    },
+    {
+        "name": "Winter Sports Promo",
+        "description": "Campaign to promote winter sports equipment and gear.",
+        "start_date": "2024-12-01",
+        "end_date": "2024-12-31",
+        "status": "pending",
+        "follower_required": 25000,
+        "blacklist_excluded": true,
+        "created_by_id": 1,
+        "updated_by_id": null,
+        "created_at": "2024-11-01 15:00:00",
+        "updated_at": null
+    }
+]

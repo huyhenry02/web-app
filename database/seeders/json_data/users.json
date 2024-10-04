@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Admin",
+        "email": "admin@gmail.com",
+        "phone": "0123456789",
+        "password": "123",
+        "user_type": "admin"
+    },
+    {
+        "name": "Creator 1",
+        "email": "creator1@gmail.com",
+        "phone": "0123456789",
+        "password": "123",
+        "user_type": "creator"
+    },
+    {
+        "name": "Creator 2",
+        "email": "creator2@gmail.com",
+        "phone": "0123456788",
+        "password": "123",
+        "user_type": "creator"
+    },
+    {
+        "name": "Creator 3",
+        "email": "creator3@gmail.com",
+        "phone": "0123456787",
+        "password": "123",
+        "user_type": "creator"
+    },
+    {
+        "name": "Creator 4",
+        "email": "creator4@gmail.com",
+        "phone": "0123456786",
+        "password": "123",
+        "user_type": "creator"
+    },
+    {
+        "name": "Creator 5",
+        "email": "creator5@gmail.com",
+        "phone": "0123456785",
+        "password": "123",
+        "user_type": "creator"
+    }
+]

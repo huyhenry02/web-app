@@ -5,7 +5,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h3 class="card-title">Danh sách chiến dịch</h3>
-                    <a href="create-campaign.html" class="btn btn-primary">Thêm mới</a>
+                    <a href="{{ route('admin.campaign.create') }}" class="btn btn-primary">Thêm mới</a>
                 </div>
 
                 <table class="table table-bordered table-hover">
@@ -28,7 +28,7 @@
                         <td>Nguyễn Văn A</td>
                         <td>
                             <a
-                                href="detail-campaign.html" class="btn btn-sm btn-info">Xem</a>
+                                href="{{ route('admin.campaign.detail') }}" class="btn btn-sm btn-info">Xem</a>
                             <a
                                 href="#" class="btn btn-sm btn-warning">Sửa</a>
                             <a

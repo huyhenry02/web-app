@@ -3,7 +3,7 @@
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="#" class="text-nowrap logo-img">
-                <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+                <img src="/assets/images/logos/dark-logo.svg" width="180" alt="" />
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-8"></i>
@@ -12,45 +12,43 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
             <ul id="sidebarnav">
-                <!-- Quản lý chiến dịch -->
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Quản lý chiến dịch</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="list-campaign.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('admin.campaign.list') }}" aria-expanded="false">
                     <span>
-                        <i class="ti ti-list-details"></i> <!-- Icon Danh sách chiến dịch -->
+                        <i class="ti ti-list-details"></i>
                     </span>
                         <span class="hide-menu">Danh sách chiến dịch</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="request-campaign.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('admin.campaign.request') }}" aria-expanded="false">
                     <span>
-                        <i class="ti ti-alert-circle"></i> <!-- Icon Yêu cầu phê duyệt -->
+                        <i class="ti ti-alert-circle"></i>
                     </span>
                         <span class="hide-menu">Yêu cầu phê duyệt</span>
                     </a>
                 </li>
 
-                <!-- Quản lý Creator -->
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Quản lý Creator</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="list-creators.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('admin.creator.list') }}" aria-expanded="false">
                     <span>
-                        <i class="ti ti-users"></i> <!-- Icon Danh sách Creator -->
+                        <i class="ti ti-users"></i>
                     </span>
                         <span class="hide-menu">Danh sách Creator</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="blacklist-creators.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('admin.creator.blacklist') }}" aria-expanded="false">
                     <span>
-                        <i class="ti ti-user-off"></i> <!-- Icon Danh sách đen -->
+                        <i class="ti ti-user-off"></i>
                     </span>
                         <span class="hide-menu">Danh sách đen</span>
                     </a>

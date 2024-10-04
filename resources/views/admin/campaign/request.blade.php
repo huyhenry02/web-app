@@ -3,15 +3,12 @@
     <div class="container-fluid">
         <div class="card mt-4">
             <div class="card-body">
-                <!-- Tiêu đề trang -->
                 <h5 class="card-title fw-semibold mb-4">Danh sách yêu cầu chờ duyệt</h5>
 
-                <!-- Tổng số yêu cầu chờ duyệt -->
                 <div class="mb-4">
                     <h6 class="fw-semibold">Tổng số yêu cầu chờ duyệt: <span id="total-requests">4</span></h6>
                 </div>
 
-                <!-- Danh sách yêu cầu -->
                 <table class="table table-bordered table-hover">
                     <thead class="thead-light">
                     <tr>
@@ -73,4 +70,52 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="approveModalLabel">Xác nhận duyệt yêu cầu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn duyệt yêu cầu của <strong id="creatorNameApprove"></strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-success">Xác nhận duyệt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rejectModalLabel">Xác nhận từ chối yêu cầu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn từ chối yêu cầu của <strong id="creatorNameReject"></strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger">Xác nhận từ chối</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openApproveModal(creatorName) {
+            document.getElementById('creatorNameApprove').textContent = creatorName;
+            var approveModal = new bootstrap.Modal(document.getElementById('approveModal'));
+            approveModal.show();
+        }
+
+        function openRejectModal(creatorName) {
+            document.getElementById('creatorNameReject').textContent = creatorName;
+            var rejectModal = new bootstrap.Modal(document.getElementById('rejectModal'));
+            rejectModal.show();
+        }
+    </script>
 @endsection

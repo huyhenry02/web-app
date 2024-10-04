@@ -3,10 +3,8 @@
     <div class="container-fluid">
         <div class="card mt-4">
             <div class="card-body">
-                <!-- Tiêu đề trang -->
                 <h5 class="card-title fw-semibold mb-4">Chi tiết chiến dịch: Chiến dịch A</h5>
 
-                <!-- Thông tin tổng quan chiến dịch -->
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <h6 class="fw-semibold">Tên chiến dịch</h6>
@@ -18,7 +16,6 @@
                     </div>
                 </div>
 
-                <!-- Thông tin ngày bắt đầu và kết thúc -->
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <h6 class="fw-semibold">Ngày bắt đầu</h6>
@@ -30,13 +27,11 @@
                     </div>
                 </div>
 
-                <!-- Mô tả chiến dịch -->
                 <div class="mb-4">
                     <h6 class="fw-semibold">Mô tả</h6>
                     <p>Đây là chiến dịch nhằm tăng số lượng người theo dõi và quảng bá thương hiệu cho sản phẩm mới.</p>
                 </div>
 
-                <!-- Số lượng người theo dõi yêu cầu -->
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <h6 class="fw-semibold">Số lượng người theo dõi yêu cầu</h6>
@@ -48,13 +43,11 @@
                     </div>
                 </div>
 
-                <!-- Người tạo chiến dịch -->
                 <div class="mb-4">
                     <h6 class="fw-semibold">Người tạo</h6>
                     <p>Nguyễn Văn A (Admin)</p>
                 </div>
 
-                <!-- File đính kèm -->
                 <div class="mb-4">
                     <h6 class="fw-semibold">Tệp đính kèm</h6>
                     <ul class="list-group">
@@ -69,7 +62,6 @@
                     </ul>
                 </div>
 
-                <!-- Danh sách đăng ký creator -->
                 <div class="mb-4">
                     <h6 class="fw-semibold">Danh sách Creator đăng ký</h6>
                     <table class="table table-bordered table-hover">
@@ -115,7 +107,6 @@
                     </table>
                 </div>
 
-                <!-- Lịch sử phê duyệt -->
                 <div class="mb-4">
                     <h6 class="fw-semibold">Lịch sử phê duyệt</h6>
                     <ul class="list-group">
