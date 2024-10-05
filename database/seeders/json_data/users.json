@@ -40,5 +40,26 @@
         "phone": "0123456785",
         "password": "123",
         "user_type": "creator"
+    },
+    {
+        "name": "Creator 6",
+        "email": "creator6@gmail.com",
+        "phone": "0123456785",
+        "password": "123",
+        "user_type": "creator"
+    },
+    {
+        "name": "Creator 7",
+        "email": "creator7@gmail.com",
+        "phone": "0123456785",
+        "password": "123",
+        "user_type": "creator"
+    },
+    {
+        "name": "Creator 8",
+        "email": "creator8@gmail.com",
+        "phone": "0123456785",
+        "password": "123",
+        "user_type": "creator"
     }
 ]

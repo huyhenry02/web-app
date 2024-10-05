@@ -19,6 +19,7 @@ class CampaignSeeder extends Seeder
         foreach ($data as $item) {
             Campaign::create([
                 'name' => $item->name,
+                'code' => $item->code,
                 'description' => $item->description,
                 'start_date' => $item->start_date,
                 'end_date' => $item->end_date,

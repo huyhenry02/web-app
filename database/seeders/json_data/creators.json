@@ -48,5 +48,35 @@
         "status": "active",
         "created_at": "2024-10-05 10:00:00",
         "updated_at": "2024-10-05 10:00:00"
+    },
+    {
+        "user_id": 7,
+        "social_media_link": "https://www.instagram.com/creator1",
+        "address": "123 Main St, City A",
+        "follower_count": 15000,
+        "platform": "Instagram",
+        "status": "active",
+        "created_at": "2024-10-05 10:00:00",
+        "updated_at": "2024-10-05 10:00:00"
+    },
+    {
+        "user_id": 8,
+        "social_media_link": "https://www.instagram.com/creator1",
+        "address": "123 Main St, City A",
+        "follower_count": 15000,
+        "platform": "Instagram",
+        "status": "active",
+        "created_at": "2024-10-05 10:00:00",
+        "updated_at": "2024-10-05 10:00:00"
+    },
+    {
+        "user_id": 9,
+        "social_media_link": "https://www.instagram.com/creator1",
+        "address": "123 Main St, City A",
+        "follower_count": 15000,
+        "platform": "Instagram",
+        "status": "active",
+        "created_at": "2024-10-05 10:00:00",
+        "updated_at": "2024-10-05 10:00:00"
     }
 ]

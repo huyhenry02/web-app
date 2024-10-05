@@ -1,6 +1,7 @@
 [
     {
         "name": "Summer Fashion Launch",
+        "code": "CD001",
         "description": "A campaign to promote the new summer fashion collection.",
         "start_date": "2024-07-01",
         "end_date": "2024-07-31",
@@ -14,6 +15,7 @@
     },
     {
         "name": "Tech Gadget Giveaway",
+        "code": "CD002",
         "description": "Promoting the launch of the latest tech gadget with a giveaway contest.",
         "start_date": "2024-08-10",
         "end_date": "2024-08-25",
@@ -27,6 +29,7 @@
     },
     {
         "name": "Healthy Living Challenge",
+        "code": "CD003",
         "description": "Encouraging followers to participate in a 30-day healthy living challenge.",
         "start_date": "2024-09-01",
         "end_date": "2024-09-30",
@@ -40,6 +43,7 @@
     },
     {
         "name": "Autumn Photography Contest",
+        "code": "CD004",
         "description": "A photography contest for capturing the beauty of autumn.",
         "start_date": "2024-10-01",
         "end_date": "2024-10-15",
@@ -53,6 +57,7 @@
     },
     {
         "name": "Winter Sports Promo",
+        "code": "CD005",
         "description": "Campaign to promote winter sports equipment and gear.",
         "start_date": "2024-12-01",
         "end_date": "2024-12-31",

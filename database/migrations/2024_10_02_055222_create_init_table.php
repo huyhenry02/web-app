@@ -25,6 +25,7 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('code')->nullable();
             $table->text('description')->nullable();
             $table->date('start_date');
             $table->date('end_date');
@@ -62,8 +63,8 @@ return new class extends Migration
 
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('model_type');
-            $table->unsignedBigInteger('model_id');
+            $table->string('fileable_type');
+            $table->unsignedBigInteger('fileable_id');
             $table->string('file_path');
             $table->string('file_name');
             $table->unsignedBigInteger('file_size');

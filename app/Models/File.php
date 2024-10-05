@@ -14,8 +14,8 @@ class File extends Model
     protected $table = 'files';
 
     protected $fillable = [
-        'model_type',
-        'model_id',
+        'fileable_type',
+        'fileable_id',
         'file_path',
         'file_name',
         'file_size',
@@ -23,7 +23,7 @@ class File extends Model
         'uploaded_by_id',
     ];
 
-    public function model(): MorphTo
+    public function file(): MorphTo
     {
         return $this->morphTo();
     }

@@ -12,6 +12,9 @@ class ApprovalHistory extends Model
 
     protected $table = 'approval_histories';
 
+    public const ACTION_APPROVED = 'approved';
+    public const ACTION_REJECTED = 'rejected';
+
     protected $fillable = [
         'campaign_id',
         'creator_id',

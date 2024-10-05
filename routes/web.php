@@ -14,6 +14,9 @@ Route::group([
 ], function () {
     Route::get('/login', [AuthController::class, 'show_login'])->name('show_login');
     Route::get('/register', [AuthController::class, 'show_register'])->name('show_register');
+
+    Route::post('/login', [AuthController::class, 'postLogin'])->name('post_login');
+    Route::get('/logout', [AuthController::class, 'postLogout'])->name('logout');
 });
 Route::group([
     'prefix' => 'admin'
@@ -23,9 +26,13 @@ Route::group([
     ], function () {
         Route::get('/list', [CampaignController::class, 'show_list'])->name('admin.campaign.list');
         Route::get('/request', [CampaignController::class, 'show_request'])->name('admin.campaign.request');
-        Route::get('/create', [CampaignController::class, 'show_create'])->name('admin.campaign.create');
-        Route::get('/detail', [CampaignController::class, 'show_detail'])->name('admin.campaign.detail');
-        Route::get('/update', [CampaignController::class, 'show_update'])->name('admin.campaign.update');
+        Route::get('/create', [CampaignController::class, 'show_create'])->name('admin.campaign.show_create');
+        Route::get('/detail/{model}', [CampaignController::class, 'show_detail'])->name('admin.campaign.detail');
+        Route::get('/update/{model}', [CampaignController::class, 'show_update'])->name('admin.campaign.show_update');
+
+        Route::post('/create', [CampaignController::class, 'create'])->name('admin.campaign.create');
+        Route::get('/delete/{model}', [CampaignController::class, 'delete'])->name('admin.campaign.delete');
+        Route::post('/update/{model}', [CampaignController::class, 'update'])->name('admin.campaign.update');
     });
 
     Route::group([
