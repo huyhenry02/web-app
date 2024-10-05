@@ -9,7 +9,9 @@
                     <span style="font-size: 1rem; color: #666;">{{ $campaign->code ?? '' }}</span>
                 </h5>
 
-                <form>
+                <form action="{{ route('admin.campaign.update' , $campaign->id) }}" enctype="multipart/form-data"
+                      method="post">
+                    @csrf
                     <div class="form-group mb-3">
                         <label for="campaignName" class="form-label">Tên chiến dịch</label>
                         <input type="text" class="form-control" id="campaignName" placeholder="Nhập tên chiến dịch"

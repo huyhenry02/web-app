@@ -92,7 +92,7 @@ class CampaignController extends Controller
         DB::beginTransaction();
         try {
             $input = $request->all();
-            $input['created_by_id'] = auth()->id();
+            $input['updated_by_id'] = auth()->id();
             $input['blacklist_excluded'] = $request->has('blacklist_excluded') ? 1 : 0;
             $model->fill($input);
             $model->save();
