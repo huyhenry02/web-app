@@ -20,7 +20,6 @@ class CampaignRegistrationSeeder extends Seeder
             CampaignRegistration::create([
                 'campaign_id' => $item->campaign_id,
                 'creator_id' => $item->creator_id,
-                'status' => $item->status,
                 'created_at' => $item->created_at,
                 'updated_at' => $item->updated_at,
             ]);

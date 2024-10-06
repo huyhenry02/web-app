@@ -12,6 +12,8 @@ class Creator extends Model
 
     protected $table = 'creators';
 
+    public const STATUS_BANNED = 'banned';
+    public const STATUS_ACTIVE = 'active';
     protected $fillable = [
         'user_id',
         'social_media_link',
@@ -19,6 +21,7 @@ class Creator extends Model
         'follower_count',
         'platform',
         'status',
+        'ban_reason',
     ];
 
     public function user(): BelongsTo

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('follower_count')->default(0);
             $table->string('platform');
             $table->enum('status', ['active', 'banned'])->default('active');
+            $table->string('ban_reason')->nullable();
             $table->timestamps();
         });
 
@@ -41,7 +42,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('campaign_id');
             $table->unsignedBigInteger('creator_id');
-            $table->enum('status', ['pending', 'approved', 'rejected', 'canceled'])->default('pending');
             $table->timestamps();
         });
 
@@ -51,13 +51,6 @@ return new class extends Migration
             $table->unsignedBigInteger('creator_id');
             $table->unsignedBigInteger('admin_id');
             $table->enum('action', ['approved', 'rejected']);
-            $table->timestamps();
-        });
-
-        Schema::create('blacklists', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('creator_id');
-            $table->text('reason');
             $table->timestamps();
         });
 
@@ -89,9 +82,6 @@ return new class extends Migration
             $table->foreign('creator_id')->references('id')->on('creators')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
         });
-        Schema::table('blacklists', function (Blueprint $table) {
-            $table->foreign('creator_id')->references('id')->on('creators')->onDelete('cascade');
-        });
         Schema::table('files', function (Blueprint $table) {
             $table->foreign('uploaded_by_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -114,9 +104,6 @@ return new class extends Migration
         Schema::table('approval_histories', function (Blueprint $table) {
             $table->dropForeign(['campaign_id', 'creator_id', 'admin_id']);
         });
-        Schema::table('blacklists', function (Blueprint $table) {
-            $table->dropForeign(['creator_id']);
-        });
         Schema::table('files', function (Blueprint $table) {
             $table->dropForeign(['uploaded_by_id']);
         });
@@ -124,7 +111,6 @@ return new class extends Migration
         Schema::dropIfExists('campaigns');
         Schema::dropIfExists('campaign_registrations');
         Schema::dropIfExists('approval_histories');
-        Schema::dropIfExists('blacklists');
         Schema::dropIfExists('files');
     }
 };

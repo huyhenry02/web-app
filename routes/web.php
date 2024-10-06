@@ -40,5 +40,8 @@ Route::group([
     ], function () {
         Route::get('/blacklist', [CreatorController::class, 'show_blacklist'])->name('admin.creator.blacklist');
         Route::get('/list', [CreatorController::class, 'show_list'])->name('admin.creator.list');
+
+        Route::post('/ban-creators', [CreatorController::class, 'actionBanCreators'])->name('admin.creator.ban.multiple');
+        Route::post('/restored-creators', [CreatorController::class, 'actionRestoreCreators'])->name('admin.creator.restore.multiple');
     });
 });

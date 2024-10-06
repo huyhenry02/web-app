@@ -6,8 +6,10 @@
                 <h5 class="card-title fw-semibold mb-4">Danh sách đen Creators</h5>
 
                 <div class="mb-4 d-flex justify-content-between align-items-center">
-                    <h6 class="fw-semibold">Tổng số Creators trong danh sách đen: <span id="total-blacklisted">3</span>
-                    </h6>
+                    <h6 class="fw-semibold">Tổng số Creators trong danh sách đen: <span id="total-blacklisted">{{ $count ?? 0 }}</span></h6>
+                    <div>
+                        <button class="btn btn-success" id="restoreSelectedBtn" onclick="restoreSelectedCreators()" disabled>Khôi phục đã chọn</button>
+                    </div>
                 </div>
 
                 <table class="table table-bordered table-hover">
@@ -24,97 +26,104 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="blacklistCheckbox"></td>
-                        <td>1</td>
-                        <td>Nguyễn A</td>
-                        <td>50,000</td>
-                        <td><a href="https://facebook.com/creatorA" target="_blank">Facebook</a></td>
-                        <td>Facebook</td>
-                        <td>Spam nội dung không phù hợp</td>
-                        <td>
-                            <button class="btn btn-sm btn-success" onclick="openRestoreModal('Nguyễn A')">Khôi phục
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="blacklistCheckbox"></td>
-                        <td>2</td>
-                        <td>Lê B</td>
-                        <td>30,000</td>
-
-                        <td><a href="https://instagram.com/creatorB" target="_blank">Instagram</a></td>
-                        <td>Instagram</td>
-                        <td>Vi phạm quy tắc cộng đồng</td>
-                        <td>
-                            <button class="btn btn-sm btn-success" onclick="openRestoreModal('Lê B')">Khôi phục</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="blacklistCheckbox"></td>
-                        <td>3</td>
-                        <td>Phạm C</td>
-                        <td>40,000</td>
-                        <td><a href="https://tiktok.com/creatorC" target="_blank">TikTok</a></td>
-                        <td>TikTok</td>
-                        <td>Tung tin sai lệch</td>
-                        <td>
-                            <button class="btn btn-sm btn-success" onclick="openRestoreModal('Phạm C')">Khôi phục
-                            </button>
-                        </td>
-                    </tr>
+                    @foreach($inactiveCreators as $key => $creator)
+                        <tr>
+                            <td><input type="checkbox" class="creatorCheckbox" value="{{ $creator->id }}" data-name="{{ $creator->user?->name }}"></td>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $creator->user?->name ?? '' }}</td>
+                            <td>{{ $creator->follower_count ?? '' }}</td>
+                            <td><a href="{{ $creator->social_media_link ?? '' }}" target="_blank">{{ $creator->platform ?? '' }}</a></td>
+                            <td>{{ $creator->platform ?? '' }}</td>
+                            <td>{{ $creator->ban_reason ?? '' }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success" onclick="openRestoreModalSingle('{{ $creator->id }}', '{{ $creator->user?->name }}')">Khôi phục</button>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
+    <form id="restoreForm" method="POST" action="{{ route('admin.creator.restore.multiple') }}">
+        @csrf
+        <input type="hidden" name="creator_ids" id="creatorIdsInput">
+    </form>
+
     <div class="modal fade" id="restoreModal" tabindex="-1" aria-labelledby="restoreModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="restoreModalLabel">Xác nhận khôi phục Creator</h5>
+                    <h5 class="modal-title" id="restoreModalLabel">Xác nhận khôi phục</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Bạn có chắc chắn muốn khôi phục creator <strong id="creatorToRestore"></strong> về trạng thái bình
-                    thường?
+                    <p>Bạn có chắc chắn muốn khôi phục những creators đã chọn không?</p>
+                    <ul id="creatorListRestore"></ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-success" onclick="confirmRestore()">Xác nhận khôi phục</button>
+                    <button type="button" class="btn btn-success" onclick="submitRestoreForm()">Xác nhận khôi phục</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Scripts -->
+
     <script>
-        function openRestoreModal(creatorName) {
-            document.getElementById('creatorToRestore').textContent = creatorName;
+        function toggleAll(source) {
+            const checkboxes = document.querySelectorAll('.creatorCheckbox');
+            checkboxes.forEach(checkbox => checkbox.checked = source.checked);
+            toggleRestoreSelectedBtn();
+        }
+
+        function toggleRestoreSelectedBtn() {
+            const anyChecked = document.querySelectorAll('.creatorCheckbox:checked').length > 0;
+            document.getElementById('restoreSelectedBtn').disabled = !anyChecked;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.creatorCheckbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', toggleRestoreSelectedBtn);
+            });
+        });
+
+        function openRestoreModalSingle(creatorId, creatorName) {
+            document.getElementById('creatorListRestore').innerHTML = `<li>${creatorName}</li>`;
+            document.getElementById('creatorIdsInput').value = creatorId;
             const restoreModal = new bootstrap.Modal(document.getElementById('restoreModal'));
             restoreModal.show();
         }
 
-        function confirmRestore() {
-            // Xử lý hành động khôi phục ở đây
-            alert("Creator đã được khôi phục về trạng thái bình thường.");
-            const restoreModal = bootstrap.Modal.getInstance(document.getElementById('restoreModal'));
-            restoreModal.hide();
+        function restoreSelectedCreators() {
+            const selectedCreators = document.querySelectorAll('.creatorCheckbox:checked');
+            const creatorList = document.getElementById('creatorListRestore');
+            const creatorIds = [];
+
+            creatorList.innerHTML = '';
+            selectedCreators.forEach(checkbox => {
+                creatorIds.push(checkbox.value);
+                const li = document.createElement('li');
+                li.textContent = checkbox.dataset.name;
+                creatorList.appendChild(li);
+            });
+
+            document.getElementById('creatorIdsInput').value = creatorIds.join(',');
+            const restoreModal = new bootstrap.Modal(document.getElementById('restoreModal'));
+            restoreModal.show();
+        }
+
+        function restoreAllCreators() {
+            document.getElementById('creatorIdsInput').value = 'all';
+            const creatorList = document.getElementById('creatorListRestore');
+            creatorList.innerHTML = '<li>All Creators</li>';
+            const restoreModal = new bootstrap.Modal(document.getElementById('restoreModal'));
+            restoreModal.show();
+        }
+
+        function submitRestoreForm() {
+            document.getElementById('restoreForm').submit();
         }
     </script>
-    <style>
-        .table th, .table td {
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .table th {
-            background-color: #f8f9fa;
-        }
-
-        .badge-success {
-            background-color: #d4edda;
-            color: #155724;
-        }
-    </style>
 @endsection

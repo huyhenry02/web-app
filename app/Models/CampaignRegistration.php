@@ -11,15 +11,9 @@ class CampaignRegistration extends Model
     use HasFactory;
 
     protected $table = 'campaign_registrations';
-
-    public const STATUS_PENDING = 'pending';
-    public const STATUS_APPROVED = 'approved';
-    public const STATUS_REJECTED = 'rejected';
-    public const STATUS_CANCELED = 'canceled';
     protected $fillable = [
         'campaign_id',
         'creator_id',
-        'status',
     ];
 
     public function campaign(): BelongsTo

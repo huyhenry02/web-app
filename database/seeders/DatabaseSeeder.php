@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CreatorSeeder::class,
             CampaignSeeder::class,
-            BlacklistSeeder::class,
             CampaignRegistrationSeeder::class,
             ApprovalHistorySeeder::class,
         ]);

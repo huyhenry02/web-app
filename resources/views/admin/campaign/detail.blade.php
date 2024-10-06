@@ -1,5 +1,4 @@
 @php use App\Models\Campaign; @endphp
-@php use App\Models\CampaignRegistration; @endphp
 @php use App\Models\ApprovalHistory; @endphp
 @extends('admin.layouts.main')
 @section('content')
@@ -87,7 +86,6 @@
                             <th scope="col">Tên Creator</th>
                             <th scope="col">Số lượng người theo dõi</th>
                             <th scope="col">Liên kết mạng xã hội</th>
-                            <th scope="col">Trạng thái</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -98,19 +96,6 @@
                                 <td>{{ $campaignRegistration->creator?->follower_count ?? '' }}</td>
                                 <td>
                                     <a href="{{ $campaignRegistration->creator?->social_media_link ?? '#' }}">{{ $campaignRegistration->creator?->social_media_link ?? '' }}</a>
-                                </td>
-                                <td>
-                                    @switch( $campaignRegistration->status )
-                                        @case( $campaignRegistration->status === CampaignRegistration::STATUS_CANCELED )
-                                            <span class="badge badge-danger">Bị từ chối</span>
-                                            @break
-                                        @case( $campaignRegistration->status === CampaignRegistration::STATUS_APPROVED )
-                                            <span class="badge badge-success">Đã duyệt</span>
-                                            @break
-                                        @case( $campaignRegistration->status === CampaignRegistration::STATUS_PENDING )
-                                            <span class="badge badge-warning">Chờ duyệt</span>
-                                            @break
-                                    @endswitch
                                 </td>
                             </tr>
                         @endforeach
