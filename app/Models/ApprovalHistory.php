@@ -14,12 +14,14 @@ class ApprovalHistory extends Model
 
     public const ACTION_APPROVED = 'approved';
     public const ACTION_REJECTED = 'rejected';
+    public const ACTION_PENDING = 'pending';
 
     protected $fillable = [
         'campaign_id',
         'creator_id',
         'admin_id',
         'action',
+        'note',
     ];
 
     public function campaign(): BelongsTo

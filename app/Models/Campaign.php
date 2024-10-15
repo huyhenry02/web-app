@@ -32,6 +32,7 @@ class Campaign extends Model
         'status',
         'follower_required',
         'blacklist_excluded',
+        'banner',
         'created_by_id',
         'updated_by_id',
     ];
@@ -54,10 +55,5 @@ class Campaign extends Model
     public function campaignRegistrations(): HasMany
     {
         return $this->hasMany(CampaignRegistration::class);
-    }
-
-    public function file(): MorphOne
-    {
-        return $this->morphOne(File::class, 'fileable');
     }
 }

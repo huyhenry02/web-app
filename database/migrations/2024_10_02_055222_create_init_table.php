@@ -33,6 +33,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'active', 'completed'])->default('pending');
             $table->integer('follower_required')->default(0);
             $table->boolean('blacklist_excluded')->default(false);
+            $table->string('banner')->nullable();
             $table->unsignedBigInteger('created_by_id');
             $table->unsignedBigInteger('updated_by_id')->nullable();
             $table->timestamps();
@@ -50,19 +51,8 @@ return new class extends Migration
             $table->unsignedBigInteger('campaign_id');
             $table->unsignedBigInteger('creator_id');
             $table->unsignedBigInteger('admin_id');
-            $table->enum('action', ['approved', 'rejected']);
-            $table->timestamps();
-        });
-
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->string('fileable_type');
-            $table->unsignedBigInteger('fileable_id');
-            $table->string('file_path');
-            $table->string('file_name');
-            $table->unsignedBigInteger('file_size');
-            $table->string('mime_type');
-            $table->unsignedBigInteger('uploaded_by_id');
+            $table->enum('action', ['approved', 'rejected', 'pending'])->default('pending');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
 
@@ -81,9 +71,6 @@ return new class extends Migration
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
             $table->foreign('creator_id')->references('id')->on('creators')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
-        });
-        Schema::table('files', function (Blueprint $table) {
-            $table->foreign('uploaded_by_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -104,13 +91,9 @@ return new class extends Migration
         Schema::table('approval_histories', function (Blueprint $table) {
             $table->dropForeign(['campaign_id', 'creator_id', 'admin_id']);
         });
-        Schema::table('files', function (Blueprint $table) {
-            $table->dropForeign(['uploaded_by_id']);
-        });
         Schema::dropIfExists('creators');
         Schema::dropIfExists('campaigns');
         Schema::dropIfExists('campaign_registrations');
         Schema::dropIfExists('approval_histories');
-        Schema::dropIfExists('files');
     }
 };
