@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CreatorController;
 use App\Http\Controllers\Admin\CampaignController;
 
 Route::get('/', static function () {
-    return view('admin.layouts.main');
+//    return redirect()->route('show_login');
+    return view('customer.detail-campaign');
 });
 
 Route::group([
@@ -19,7 +21,8 @@ Route::group([
     Route::get('/logout', [AuthController::class, 'postLogout'])->name('logout');
 });
 Route::group([
-    'prefix' => 'admin'
+    'prefix' => 'admin',
+    'middleware' => 'auth'
 ], function () {
     Route::group([
         'prefix' => 'campaign'
@@ -44,4 +47,15 @@ Route::group([
         Route::post('/ban-creators', [CreatorController::class, 'actionBanCreators'])->name('admin.creator.ban.multiple');
         Route::post('/restored-creators', [CreatorController::class, 'actionRestoreCreators'])->name('admin.creator.restore.multiple');
     });
+});
+Route::group([
+    'prefix' => 'creator',
+], function () {
+    Route::get('/index', [IndexController::class, 'showIndex'])->name('creator.index');
+    Route::get('/detail-campaign', [IndexController::class, 'showDetailCampaign'])->name('creator.showDetailCampaign');
+    Route::get('/list-campaign', [IndexController::class, 'showListCampaign'])->name('creator.showListCampaign');
+    Route::get('/login', [IndexController::class, 'showLogin'])->name('creator.showLogin');
+    Route::get('/register', [IndexController::class, 'showRegister'])->name('creator.showRegister');
+    Route::get('/your-campaign', [IndexController::class, 'showYourCampaign'])->name('creator.showYourCampaign');
+    Route::get('/request-campaign', [IndexController::class, 'showRequestCampaign'])->name('creator.showRequestCampaign');
 });
