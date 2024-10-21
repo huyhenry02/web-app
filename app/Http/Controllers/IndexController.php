@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
@@ -14,14 +15,21 @@ class IndexController extends Controller
         return view('customer.index');
     }
 
-    public function showDetailCampaign(): View|Factory|Application
+    public function showDetailCampaign(Campaign $model): View|Factory|Application
     {
-        return view('customer.detail-campaign');
+        return view('customer.detail-campaign',
+            [
+                'model' => $model
+            ]);
     }
 
     public function showListCampaign(): View|Factory|Application
     {
-        return view('customer.list-campaign');
+        $campaigns = Campaign::where('status', Campaign::STATUS_ACTIVE)->get();
+        return view('customer.list-campaign',
+            [
+                'campaigns' => $campaigns
+            ]);
     }
 
     public function showLogin(): View|Factory|Application

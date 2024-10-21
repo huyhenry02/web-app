@@ -10,79 +10,13 @@
         <div class="inner">
             <div class="content">
                 <div class="campaign-list">
-                    <!-- Campaign Item -->
-                    <article class="campaign-item">
-                        <h3>Chiến dịch bảo vệ rừng</h3>
-                        <p>Bảo vệ những khu rừng nguyên sinh khỏi nạn phá rừng và khai thác trái phép.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <!-- Repeat for other campaigns -->
-                    <article class="campaign-item">
-                        <h3>Giúp đỡ trẻ em vùng sâu vùng xa</h3>
-                        <p>Hỗ trợ giáo dục và cuộc sống cho trẻ em tại các vùng khó khăn.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
-
-                    <article class="campaign-item">
-                        <h3>Phát triển hạ tầng nông thôn</h3>
-                        <p>Cải thiện cơ sở hạ tầng tại các vùng nông thôn, tạo điều kiện phát triển kinh tế bền vững.</p>
-                        <a href="" class="campaign-link">Xem Chi Tiết</a>
-                    </article>
+                    @foreach($campaigns as $campaign)
+                        <article class="campaign-item">
+                            <h3>{{ $campaign->name ?? '' }}</h3>
+                            <p>{{ $campaign->description ?? '' }}</p>
+                            <a href="{{ route('creator.showDetailCampaign', $campaign->id) }}" class="campaign-link">Xem Chi Tiết</a>
+                        </article>
+                    @endforeach
                 </div>
             </div>
         </div>

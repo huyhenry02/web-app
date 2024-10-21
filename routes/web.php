@@ -52,7 +52,7 @@ Route::group([
     'prefix' => 'creator',
 ], function () {
     Route::get('/index', [IndexController::class, 'showIndex'])->name('creator.index');
-    Route::get('/detail-campaign', [IndexController::class, 'showDetailCampaign'])->name('creator.showDetailCampaign');
+    Route::get('/detail-campaign/{model}', [IndexController::class, 'showDetailCampaign'])->name('creator.showDetailCampaign');
     Route::get('/list-campaign', [IndexController::class, 'showListCampaign'])->name('creator.showListCampaign');
     Route::get('/login', [IndexController::class, 'showLogin'])->name('creator.showLogin');
     Route::get('/register', [IndexController::class, 'showRegister'])->name('creator.showRegister');
