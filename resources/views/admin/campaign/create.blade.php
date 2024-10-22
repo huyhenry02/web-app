@@ -15,7 +15,13 @@
 
                     <div class="form-group mb-3">
                         <label for="description" class="form-label">Mô tả</label>
-                        <textarea class="form-control" id="description" rows="4" placeholder="Nhập mô tả chi tiết" name="description"
+                        <textarea class="form-control" id="description" rows="3" placeholder="Nhập mô tả chi tiết" name="description"
+                                  required></textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="content" class="form-label">Nội dung</label>
+                        <textarea class="form-control" id="content" rows="5" placeholder="Nhập nội dung chi tiết" name="content"
                                   required></textarea>
                     </div>
 

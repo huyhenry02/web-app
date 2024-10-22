@@ -1,75 +1,62 @@
 @extends('customer.layouts.main')
 @section('content')
-    <div id="heading">
-        <h1>Đăng nhập</h1>
-    </div>
+    <main id="main">
 
-    <!-- Main -->
-    <section id="main" class="wrapper">
-        <!-- Registration Form -->
-        <div class="inner">
-            <div class="content">
-                <h2>Đăng nhập hệ thống</h2>
-                <form action="#" method="POST">
-                    <div class="fields">
-                        <div class="field">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Nhập email của bạn" required/>
-                        </div>
+        <!-- ======= Breadcrumbs ======= -->
+        <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/customer/img/breadcrumbs-bg.jpg');">
+            <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
-                        <div class="field half">
-                            <label for="password">Mật khẩu</label>
-                            <input type="password" name="password" id="password" placeholder="Mật khẩu" required/>
-                        </div>
-                    </div>
-                    <ul class="actions" style="margin-top: 10px">
-                        <li><input type="submit" value="Đăng nhập" class="primary"/></li>
-                        <li><input type="reset" value="Xóa"/></li>
-                    </ul>
-                </form>
+                <h2>Đăng nhập</h2>
+                <ol>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li>Đăng nhập</li>
+                </ol>
+
             </div>
-        </div>
+        </div><!-- End Breadcrumbs -->
 
-    </section>
-    <style>
-        #register .inner {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2em;
-            background: #f9f9f9;
-            border-radius: 10px;
-        }
+        <!-- ======= Our Projects Section ======= -->
+        <section id="login" class="login section-bg">
+            <div class="container" data-aos="fade-up">
 
-        #register h2 {
-            text-align: center;
-            margin-bottom: 1em;
-        }
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
 
-        #register .fields {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1em;
-        }
+                        <div class="card shadow-sm">
+                            <div class="card-body p-5">
 
-        #register .field.half {
-            flex: 1 1 calc(50% - 1em);
-            margin-top: 5px;
-        }
+                                <h4 class="card-title text-center mb-4">Đăng nhập vào tài khoản của bạn</h4>
 
-        #register .actions {
-            display: flex;
-            justify-content: center;
-            gap: 1em;
-        }
+                                <form action="{{ route('post_login') }}" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email của bạn" required>
+                                    </div>
 
-        #register .actions .primary {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 0.75em 1.5em;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Mật khẩu</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                                    </div>
 
-    </style>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                        <label class="form-check-label" for="remember">Nhớ tài khoản</label>
+                                    </div>
+
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+    </main><!-- End #main -->
 @endsection

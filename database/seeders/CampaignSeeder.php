@@ -20,16 +20,18 @@ class CampaignSeeder extends Seeder
             Campaign::create([
                 'name' => $item->name,
                 'code' => $item->code,
-                'description' => $item->description,
+                'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet neque non nisi euismod aliquam. Sed vulputate velit at leo sollicitudin, vel tincidunt nunc aliquam. Quisque sit amet tortor et arcu gravida sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus sed diam et nisi tincidunt auctor non a eros. Integer ut purus nec justo euismod vehicula. Proin lacinia dui non erat varius, ac ultrices lorem commodo. Nulla facilisi. ',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet neque non nisi euismod aliquam. Sed vulputate velit at leo sollicitudin, vel tincidunt nunc aliquam. Quisque sit amet tortor et arcu gravida sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus sed diam et nisi tincidunt auctor non a eros. Integer ut purus nec justo euismod vehicula. Proin lacinia dui non erat varius, ac ultrices lorem commodo. Nulla facilisi. ',
                 'start_date' => $item->start_date,
                 'end_date' => $item->end_date,
-                'status' => $item->status,
+                'status' => 'active',
                 'follower_required' => $item->follower_required,
                 'blacklist_excluded' => $item->blacklist_excluded,
+                'banner' => $item->banner,
                 'created_by_id' => $item->created_by_id,
                 'updated_by_id' => $item->updated_by_id,
-                'created_at' => $item->created_at,
-                'updated_at' => $item->updated_at,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

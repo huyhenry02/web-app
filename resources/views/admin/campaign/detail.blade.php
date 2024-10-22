@@ -49,6 +49,11 @@
                     <p>{{ $campaign->description ?? '' }}</p>
                 </div>
 
+                <div class="mb-4">
+                    <h6 class="fw-semibold">Nội dung</h6>
+                    <p>{{ $campaign->content ?? '' }}</p>
+                </div>
+
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <h6 class="fw-semibold">Số lượng người theo dõi yêu cầu</h6>

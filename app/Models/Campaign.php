@@ -27,6 +27,7 @@ class Campaign extends Model
         'name',
         'code',
         'description',
+        'content',
         'start_date',
         'end_date',
         'status',

@@ -24,6 +24,12 @@
                                   >{{ $campaign -> description ?? '' }}</textarea>
                     </div>
 
+                    <div class="form-group mb-3">
+                        <label for="content" class="form-label">Nội dung</label>
+                        <textarea class="form-control" id="content" rows="4" placeholder="Nhập nội dung chi tiết" name="content"
+                                  >{{ $campaign -> content ?? '' }}</textarea>
+                    </div>
+
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="startDate" class="form-label">Ngày bắt đầu</label>

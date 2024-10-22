@@ -55,6 +55,9 @@ class CampaignController extends Controller
             $input = $request->all();
             $input['created_by_id'] = auth()->id();
             $input['blacklist_excluded'] = $request->has('blacklist_excluded') ? 1 : 0;
+            if ($request->hasFile('file')) {
+                $input['banner'] = $this->handleUploadImage($request->file('file'));
+            }
             $campaign = new Campaign();
             $campaign->fill($input);
             $campaign->save();
@@ -62,9 +65,6 @@ class CampaignController extends Controller
             $campaign->code = 'CD' . str_pad($campaign->id, 3, '0', STR_PAD_LEFT);
             $campaign->save();
 
-            if ($request->hasFile('file')) {
-                $this->handleFileUpload($request->file('file'), $campaign);
-            }
             DB::commit();
             return redirect()->route('admin.campaign.list');
         } catch (Exception $e) {
@@ -94,12 +94,11 @@ class CampaignController extends Controller
             $input = $request->all();
             $input['updated_by_id'] = auth()->id();
             $input['blacklist_excluded'] = $request->has('blacklist_excluded') ? 1 : 0;
+            if ($request->hasFile('file')) {
+                $input['banner'] = $this->handleUploadImage($request->file('file'));
+            }
             $model->fill($input);
             $model->save();
-            if ($request->hasFile('file')) {
-                $model->file()->delete();
-                $this->handleFileUpload($request->file('file'), $model);
-            }
             DB::commit();
             return redirect()->route('admin.campaign.list');
         } catch (Exception $e) {
@@ -107,38 +106,11 @@ class CampaignController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-    private function handleFileUpload($file, $campaign): void
+    public function handleUploadImage($request): string
     {
-        $image = Image::read($file);
-
-        $timestamp = time();
-        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $extension = $file->getClientOriginalExtension();
-        $imageName = 'banner_campaign_' . $timestamp . '_' . $originalName . '.' . $extension;
-
-        $destinationPath = public_path('files/');
-        $destinationPathThumbnail = public_path('files/campaign/');
-
-        if (!File::exists($destinationPath)) {
-            File::makeDirectory($destinationPath, 0755, true);
-        }
-        if (!File::exists($destinationPathThumbnail)) {
-            File::makeDirectory($destinationPathThumbnail, 0755, true);
-        }
-
-        $image->save($destinationPath . $imageName);
-
-        $image->resize(650, 366);
-        $image->save($destinationPathThumbnail . $imageName);
-
-        $fileData = new \App\Models\File();
-        $fileData->fileable_type = Campaign::class;
-        $fileData->fileable_id = $campaign->id;
-        $fileData->file_path = 'files/' . $imageName;
-        $fileData->file_name = $imageName;
-        $fileData->file_size = $file->getSize();
-        $fileData->mime_type = $file->getMimeType();
-        $fileData->uploaded_by_id = auth()->id();
-        $fileData->save();
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $imagePath = $image->storePubliclyAs('images/banners', $imageName);
+        return asset('storage/' . $imagePath);
     }
 }

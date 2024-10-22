@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('code')->nullable();
             $table->text('description')->nullable();
+            $table->text('content')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->enum('status', ['pending', 'active', 'completed'])->default('pending');

@@ -1,97 +1,99 @@
 @extends('customer.layouts.main')
 @section('content')
-    <!-- Heading -->
-    <div id="heading">
-        <h1>Đăng ký</h1>
-    </div>
+    <main id="main">
 
-    <!-- Main -->
-    <section id="main" class="wrapper">
-        <!-- Registration Form -->
-        <div class="inner">
-            <div class="content">
-                <h2>Đăng Ký Tài Khoản</h2>
-                <form action="#" method="POST">
-                    <div class="fields">
-                        <div class="field half">
-                            <label for="first_name">Tên</label>
-                            <input type="text" name="first_name" id="first_name" placeholder="Nhập tên của bạn" required/>
-                        </div>
-                        <div class="field half">
-                            <label for="last_name">Họ</label>
-                            <input type="text" name="last_name" id="last_name" placeholder="Nhập họ của bạn" required/>
-                        </div>
-                        <div class="field">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Nhập email của bạn" required/>
-                        </div>
-                        <div class="field">
-                            <label for="username">Tên đăng nhập</label>
-                            <input type="text" name="username" id="username" placeholder="Nhập tên đăng nhập" required/>
-                        </div>
-                        <div class="field half">
-                            <label for="password">Mật khẩu</label>
-                            <input type="password" name="password" id="password" placeholder="Tạo mật khẩu" required/>
-                        </div>
-                        <div class="field half">
-                            <label for="confirm_password">Xác nhận mật khẩu</label>
-                            <input type="password" name="confirm_password" id="confirm_password" placeholder="Xác nhận mật khẩu"
-                                   required/>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <label for="terms" style="margin-top: 15px">Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách bảo
-                                mật</a>.</label>
-                    </div>
-                    <ul class="actions">
-                        <li><input type="submit" value="Đăng Ký" class="primary"/></li>
-                        <li><input type="reset" value="Xóa"/></li>
-                    </ul>
-                </form>
+        <!-- ======= Breadcrumbs ======= -->
+        <div class="breadcrumbs d-flex align-items-center"
+             style="background-image: url('/customer/img/breadcrumbs-bg.jpg');">
+            <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+                <h2>Đăng ký</h2>
+                <ol>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li>Đăng ký</li>
+                </ol>
             </div>
-        </div>
+        </div><!-- End Breadcrumbs -->
 
-    </section>
-    <style>
-        #register .inner {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2em;
-            background: #f9f9f9;
-            border-radius: 10px;
-        }
+        <!-- ======= Register Section ======= -->
+        <section id="register" class="register section-bg">
+            <div class="container" data-aos="fade-up">
 
-        #register h2 {
-            text-align: center;
-            margin-bottom: 1em;
-        }
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
 
-        #register .fields {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1em;
-        }
+                        <div class="card shadow-sm">
+                            <div class="card-body p-5">
 
-        #register .field.half {
-            flex: 1 1 calc(50% - 1em);
-            margin-top: 5px;
-        }
+                                <h4 class="card-title text-center mb-4">Tạo tài khoản mới</h4>
 
-        #register .actions {
-            display: flex;
-            justify-content: center;
-            gap: 1em;
-        }
+                                <form action="{{ route('creator.postRegister') }}" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Tên đầy đủ</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                               placeholder="Nhập tên của bạn" required>
+                                    </div>
 
-        #register .actions .primary {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 0.75em 1.5em;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                               placeholder="Nhập email của bạn" required>
+                                    </div>
 
-    </style>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Số điện thoại</label>
+                                        <input type="text" class="form-control" id="phone" name="phone"
+                                               placeholder="Nhập số điện thoại của bạn" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="social_media_link" class="form-label">Link trang cá nhân</label>
+                                        <input type="text" class="form-control" id="social_media_link"
+                                               name="social_media_link" placeholder="Nhập link trang cá nhân" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="platform" class="form-label">Nền tảng</label>
+                                        <input type="text" class="form-control" id="platform" name="platform"
+                                               placeholder="Nhập tên nền tảng" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">Địa chỉ</label>
+                                        <input type="text" class="form-control" id="address" name="address"
+                                               placeholder="Nhập địa chỉ" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="follower_count" class="form-label">Số lượng người theo dõi hiện
+                                            tại</label>
+                                        <input type="number" class="form-control" id="follower_count"
+                                               name="follower_count" placeholder="Nhập số lượng người theo dõi hiện tại"
+                                               required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Mật khẩu</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                               placeholder="Nhập mật khẩu" required>
+                                    </div>
+
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                                    </div>
+
+                                    <div class="text-center mt-3">
+                                        <a href="#">Đã có tài khoản? Đăng nhập ngay</a>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Register Section -->
+
+    </main><!-- End #main -->
 @endsection

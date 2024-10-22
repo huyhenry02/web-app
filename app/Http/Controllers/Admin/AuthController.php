@@ -14,12 +14,12 @@ class AuthController extends Controller
 {
     public function show_login(): View|Factory|Application
     {
-        return view('admin.auth.login');
+        return view('customer.login');
     }
 
     public function show_register(): View|Factory|Application
     {
-        return view('admin.auth.register');
+        return view('customer.register');
     }
 
     public function postLogin(Request $request): RedirectResponse
@@ -27,7 +27,10 @@ class AuthController extends Controller
         try {
             $credentials = $request->only('email', 'password');
             if (auth()->attempt($credentials)) {
-                return redirect()->route('admin.campaign.list');
+                if ( auth()->user()->user_type === 'admin') {
+                    return redirect()->route('admin.campaign.list');
+                }
+                return redirect()->route('creator.index');
             }
             return redirect()->back();
         }catch (Exception $e) {

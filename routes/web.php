@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\CampaignController;
 
 Route::get('/', static function () {
 //    return redirect()->route('show_login');
-    return view('customer.detail-campaign');
+    return view('customer.request-campaign');
 });
 
 Route::group([
@@ -58,4 +58,6 @@ Route::group([
     Route::get('/register', [IndexController::class, 'showRegister'])->name('creator.showRegister');
     Route::get('/your-campaign', [IndexController::class, 'showYourCampaign'])->name('creator.showYourCampaign');
     Route::get('/request-campaign', [IndexController::class, 'showRequestCampaign'])->name('creator.showRequestCampaign');
+
+    Route::post('/register', [IndexController::class, 'postRegister'])->name('creator.postRegister');
 });

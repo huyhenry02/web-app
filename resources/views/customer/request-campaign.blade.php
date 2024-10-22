@@ -1,104 +1,67 @@
 @extends('customer.layouts.main')
 @section('content')
-    <!-- Heading -->
-    <div id="heading" class="text-center">
-        <h1>Yêu cầu của bạn</h1>
-    </div>
-    <section id="main" class="wrapper">
-        <div class="inner">
-            <div class="content">
-                <!-- Campaigns Table -->
-                <table class="table table-bordered table-hover">
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên Chiến Dịch</th>
-                        <th scope="col">Mã Chiến Dịch</th>
-                        <th scope="col">Lý do tham gia</th>
-                        <th scope="col">Ngày gửi yêu cầu</th>
-                        <th scope="col">Trạng Thái</th>
-                        <th scope="col">Hành Động</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+    <main id="main">
 
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>#CAM002</td>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>15/08/2024</td>
-                        <td class="text-success" >Đang Tham Gia</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">Xem Chi Tiết</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>#CAM002</td>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>15/08/2024</td>
-                        <td class="text-success" >Đang Tham Gia</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">Xem Chi Tiết</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>#CAM002</td>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>15/08/2024</td>
-                        <td class="text-success" >Đang Tham Gia</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">Xem Chi Tiết</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>#CAM002</td>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>15/08/2024</td>
-                        <td class="text-success" >Đang Tham Gia</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">Xem Chi Tiết</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>#CAM002</td>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>15/08/2024</td>
-                        <td class="text-success" >Đang Tham Gia</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">Xem Chi Tiết</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>#CAM002</td>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>15/08/2024</td>
-                        <td class="text-success" >Đang Tham Gia</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">Xem Chi Tiết</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>#CAM002</td>
-                        <td>Giúp Đỡ Trẻ Em Vùng Xa</td>
-                        <td>15/08/2024</td>
-                        <td class="text-success" >Đang Tham Gia</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">Xem Chi Tiết</a></td>
-                    </tr>
-
-                    </tbody>
-                </table>
+        <!-- ======= Breadcrumbs ======= -->
+        <div class="breadcrumbs d-flex align-items-center"
+             style="background-image: url('/customer/img/breadcrumbs-bg.jpg');">
+            <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+                <h2>Yêu cầu tham gia chiến dịch</h2>
+                <ol>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li>Yêu cầu</li>
+                </ol>
             </div>
-        </div>
-    </section>
-    <style>
-        .table th, .table td {
-            text-align: center;
-            vertical-align: middle;
-        }
+        </div><!-- End Breadcrumbs -->
 
-        .table th {
-            background-color: #f8f9fa;
-        }
-    </style>
+        <!-- ======= Requests Section ======= -->
+        <section id="requests" class="requests section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <!-- Requests List -->
+                        <div class="card shadow-sm mb-5">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Danh sách yêu cầu hiện tại</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped align-middle">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Mã yêu cầu</th>
+                                            <th scope="col">Tên chiến dịch</th>
+                                            <th scope="col">Trạng thái</th>
+                                            <th scope="col">Ngày gửi yêu cầu</th>
+                                            <th scope="col">Hành động</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <span class="badge bg-warning">Đang chờ</span>
+                                            </td>
+                                            <td></td>
+                                            <td>
+                                                <a href="#" class="btn btn-info btn-sm">Xem chi tiết</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!-- End Requests List -->
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Requests Section -->
+
+    </main><!-- End #main -->
 @endsection
