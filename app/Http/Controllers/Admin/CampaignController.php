@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\ApprovalHistory;
+use Illuminate\Http\JsonResponse;
 use App\Models\CampaignRegistration;
 use Exception;
 use App\Models\Campaign;
@@ -24,7 +25,7 @@ class CampaignController extends Controller
 
     public function show_request(): View|Factory|Application
     {
-        $approvalHistories = ApprovalHistory::all();
+        $approvalHistories = ApprovalHistory::where('action', ApprovalHistory::ACTION_PENDING)->get();
         return view('admin.campaign.request',
             [
                 'approvalHistories' => $approvalHistories
@@ -144,4 +145,29 @@ class CampaignController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    public function approveRequest(Request $request): JsonResponse
+    {
+        $approval = ApprovalHistory::find($request->id);
+        $approval->action = ApprovalHistory::ACTION_APPROVED;
+        $approval->save();
+
+        $inputCampaignRegistration['campaign_id'] = $approval->campaign_id;
+        $inputCampaignRegistration['creator_id'] = $approval->creator_id;
+        $campaignRegistration = new CampaignRegistration();
+        $campaignRegistration->fill($inputCampaignRegistration);
+        $campaignRegistration->save();
+
+        return response()->json(['success' => 'Yêu cầu đã được duyệt']);
+    }
+
+    public function rejectRequest(Request $request): JsonResponse
+    {
+        $approval = ApprovalHistory::find($request->id);
+        $approval->action = ApprovalHistory::ACTION_REJECTED;
+        $approval->save();
+
+        return response()->json(['success' => 'Yêu cầu đã bị từ chối']);
+    }
+
 }

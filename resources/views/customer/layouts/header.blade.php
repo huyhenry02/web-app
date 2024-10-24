@@ -11,9 +11,8 @@
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a href="{{ route('creator.index') }}" class="active">Trang chủ</a></li>
-                <li><a href="#">Về Chúng tôi</a></li>
                 <li><a href="{{ route('creator.showListCampaign') }}">Chiến dịch</a></li>
-                <li><a href="#">Liên lạc</a></li>
+                <li><a href="{{ route('creator.showContact') }}">Liên lạc</a></li>
             </ul>
         </nav><!-- .navbar -->
 

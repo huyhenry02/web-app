@@ -6,7 +6,7 @@
                 <h5 class="card-title fw-semibold mb-4">Danh sách yêu cầu chờ duyệt</h5>
 
                 <div class="mb-4">
-                    <h6 class="fw-semibold">Tổng số yêu cầu chờ duyệt: <span id="total-requests">4</span></h6>
+                    <h6 class="fw-semibold">Tổng số yêu cầu chờ duyệt: <span id="total-requests">{{ $approvalHistories->count() ?? 0 }}</span></h6>
                 </div>
 
                 <table class="table table-bordered table-hover">
@@ -33,10 +33,15 @@
                                     {{ $val->campaign?->name ?? '' }}
                                 </a></td>
                             <td class="text-lg-end">
-                                <button class="btn btn-sm btn-success" onclick="openApproveModal('Trần B')">Duyệt
+                                <button class="btn btn-sm btn-success"
+                                        onclick="openApproveModal('{{ $val->creator?->user?->name ?? '' }}', {{ $val->id }})">
+                                    Duyệt
                                 </button>
-                                <button class="btn btn-sm btn-danger" onclick="openRejectModal('Trần B')">Từ chối
+                                <button class="btn btn-sm btn-danger"
+                                        onclick="openRejectModal('{{ $val->creator?->user?->name ?? '' }}', {{ $val->id }})">
+                                    Từ chối
                                 </button>
+
                             </td>
                         </tr>
                     @endforeach
@@ -57,7 +62,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-success">Xác nhận duyệt</button>
+                    <button type="button" class="btn btn-success" id="approveConfirmBtn">Xác nhận duyệt</button>
                 </div>
             </div>
         </div>
@@ -75,22 +80,62 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger">Xác nhận từ chối</button>
+                    <button type="button" class="btn btn-danger" id="rejectConfirmBtn">Xác nhận từ chối</button>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
-        function openApproveModal(creatorName) {
+        function openApproveModal(creatorName, requestId) {
             document.getElementById('creatorNameApprove').textContent = creatorName;
             var approveModal = new bootstrap.Modal(document.getElementById('approveModal'));
             approveModal.show();
+
+            document.getElementById('approveConfirmBtn').onclick = function () {
+                approveRequest(requestId);
+            };
         }
 
-        function openRejectModal(creatorName) {
+        function openRejectModal(creatorName, requestId) {
             document.getElementById('creatorNameReject').textContent = creatorName;
             var rejectModal = new bootstrap.Modal(document.getElementById('rejectModal'));
             rejectModal.show();
+
+            document.getElementById('rejectConfirmBtn').onclick = function () {
+                rejectRequest(requestId);
+            };
         }
+
+        function approveRequest(requestId) {
+            $.ajax({
+                url: '{{ route('admin.campaign.approve') }}',
+                type: 'POST',
+                data: {
+                    id: requestId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    alert(response.success);
+                    location.reload();
+                }
+            });
+        }
+
+        function rejectRequest(requestId) {
+            $.ajax({
+                url: '{{ route('admin.campaign.reject') }}',
+                type: 'POST',
+                data: {
+                    id: requestId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    alert(response.success);
+                    location.reload();
+                }
+            });
+        }
+
     </script>
 @endsection

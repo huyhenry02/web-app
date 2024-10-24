@@ -62,6 +62,11 @@ class IndexController extends Controller
         ]);
     }
 
+    public function showContact(): View|Factory|Application
+    {
+        return view('customer.contact');
+    }
+
     public function postRegister(Request $request): RedirectResponse
     {
         DB::beginTransaction();

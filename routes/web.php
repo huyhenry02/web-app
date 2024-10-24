@@ -37,6 +37,9 @@ Route::group([
         Route::get('/delete/{model}', [CampaignController::class, 'delete'])->name('admin.campaign.delete');
         Route::post('/update/{model}', [CampaignController::class, 'update'])->name('admin.campaign.update');
         Route::post('/action-request-join/{model}', [CampaignController::class, 'actionRequestJoin'])->name('admin.campaign.actionRequestJoin');
+        Route::post('/requests/approve', [CampaignController::class, 'approveRequest'])->name('admin.campaign.approve');
+        Route::post('/requests/reject', [CampaignController::class, 'rejectRequest'])->name('admin.campaign.reject');
+
     });
 
     Route::group([
@@ -59,6 +62,7 @@ Route::group([
     Route::get('/register', [IndexController::class, 'showRegister'])->name('creator.showRegister');
     Route::get('/your-campaign', [IndexController::class, 'showYourCampaign'])->name('creator.showYourCampaign');
     Route::get('/request-campaign', [IndexController::class, 'showRequestCampaign'])->name('creator.showRequestCampaign');
+    Route::get('/contact', [IndexController::class, 'showContact'])->name('creator.showContact');
 
     Route::post('/register', [IndexController::class, 'postRegister'])->name('creator.postRegister');
     Route::post('/send-request-join', [IndexController::class, 'sendRequestJoin'])->name('creator.sendRequestJoin');
