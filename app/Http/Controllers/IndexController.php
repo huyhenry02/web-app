@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApprovalHistory;
 use Exception;
 use App\Models\User;
 use App\Models\Creator;
@@ -54,7 +55,11 @@ class IndexController extends Controller
 
     public function showRequestCampaign(): View|Factory|Application
     {
-        return view('customer.request-campaign');
+        $approvalHistories = ApprovalHistory::where('creator_id', auth()->user()->id)->get();
+        return view('customer.request-campaign',
+        [
+            'approvalHistories' => $approvalHistories
+        ]);
     }
 
     public function postRegister(Request $request): RedirectResponse
@@ -79,6 +84,25 @@ class IndexController extends Controller
         }catch (Exception $e) {
             DB::rollBack();
             return redirect()->route('show_register')->with('error', $e->getMessage());
+        }
+    }
+
+    public function sendRequestJoin(Request $request): RedirectResponse
+    {
+        try {
+            DB::beginTransaction();
+            $input = $request->all();
+            $input['creator_id'] = auth()->user()->id;
+            $input['admin_id'] = 1;
+            $input['status'] = Campaign::STATUS_PENDING;
+            $approvalHistory = new ApprovalHistory();
+            $approvalHistory->fill($input);
+            $approvalHistory->save();
+            DB::commit();
+            return redirect()->route('creator.showRequestCampaign')->with('success', 'Request successfully');
+        }catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 }

@@ -7,8 +7,8 @@ use App\Http\Controllers\Admin\CreatorController;
 use App\Http\Controllers\Admin\CampaignController;
 
 Route::get('/', static function () {
-//    return redirect()->route('show_login');
-    return view('customer.request-campaign');
+    return redirect()->route('show_login');
+//    return view('customer.request-campaign');
 });
 
 Route::group([
@@ -36,6 +36,7 @@ Route::group([
         Route::post('/create', [CampaignController::class, 'create'])->name('admin.campaign.create');
         Route::get('/delete/{model}', [CampaignController::class, 'delete'])->name('admin.campaign.delete');
         Route::post('/update/{model}', [CampaignController::class, 'update'])->name('admin.campaign.update');
+        Route::post('/action-request-join/{model}', [CampaignController::class, 'actionRequestJoin'])->name('admin.campaign.actionRequestJoin');
     });
 
     Route::group([
@@ -60,4 +61,5 @@ Route::group([
     Route::get('/request-campaign', [IndexController::class, 'showRequestCampaign'])->name('creator.showRequestCampaign');
 
     Route::post('/register', [IndexController::class, 'postRegister'])->name('creator.postRegister');
+    Route::post('/send-request-join', [IndexController::class, 'sendRequestJoin'])->name('creator.sendRequestJoin');
 });

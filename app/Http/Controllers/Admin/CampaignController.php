@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\ApprovalHistory;
+use App\Models\CampaignRegistration;
 use Exception;
-use Illuminate\Support\Facades\File;
 use App\Models\Campaign;
 use Illuminate\Http\Request;
-use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
@@ -24,7 +24,11 @@ class CampaignController extends Controller
 
     public function show_request(): View|Factory|Application
     {
-        return view('admin.campaign.request');
+        $approvalHistories = ApprovalHistory::all();
+        return view('admin.campaign.request',
+            [
+                'approvalHistories' => $approvalHistories
+            ]);
     }
 
     public function show_create(): View|Factory|Application
@@ -106,11 +110,38 @@ class CampaignController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
     public function handleUploadImage($request): string
     {
         $image = $request->file('image');
         $imageName = time() . '.' . $image->getClientOriginalExtension();
         $imagePath = $image->storePubliclyAs('images/banners', $imageName);
         return asset('storage/' . $imagePath);
+    }
+
+
+    public function actionRequestJoin(Request $request, ApprovalHistory $model): RedirectResponse
+    {
+        try {
+            $input = $request->all();
+            if ($input['action'] === ApprovalHistory::ACTION_REJECTED) {
+                $model->status = ApprovalHistory::ACTION_REJECTED;
+                $model->save();
+                return redirect()->route('admin.campaign.request')->with('success', 'Request has been REJECTED');
+            }
+            $model->action = ApprovalHistory::ACTION_APPROVED;
+            $model->save();
+
+            $inputCampaignRegistration['campaign_id'] = $model->campaign_id;
+            $inputCampaignRegistration['creator_id'] = $model->creator_id;
+            $campaignRegistration = new CampaignRegistration();
+            $campaignRegistration->fill($inputCampaignRegistration);
+            $campaignRegistration->save();
+
+            return redirect()->route('admin.campaign.request')->with('success', 'Request has been ACCEPTED');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

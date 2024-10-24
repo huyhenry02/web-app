@@ -67,7 +67,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <form action="" method="POST">
+                    <form action="{{ route('creator.sendRequestJoin') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="campaign_id" value="{{ $model->id }}">
                         <button type="submit" class="btn btn-primary">Xác nhận</button>
                     </form>
                 </div>

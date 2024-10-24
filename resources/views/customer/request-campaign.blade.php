@@ -1,3 +1,4 @@
+@php use App\Models\ApprovalHistory; @endphp
 @extends('customer.layouts.main')
 @section('content')
     <main id="main">
@@ -40,17 +41,32 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <span class="badge bg-warning">Đang chờ</span>
-                                            </td>
-                                            <td></td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm">Xem chi tiết</a>
-                                            </td>
-                                        </tr>
+                                        @foreach( $approvalHistories as $key => $val )
+                                            <tr>
+                                                <td>
+                                                    {{ $val->id }}
+                                                </td>
+                                                <td>
+                                                    {{ $val->campaign?->name ?? ''}}
+                                                </td>
+                                                <td>
+                                                    @if( $val->action == ApprovalHistory::ACTION_PENDING )
+                                                        <span class="badge bg-warning">Đang chờ duyệt</span>
+                                                    @elseif( $val->action == ApprovalHistory::ACTION_APPROVED )
+                                                        <span class="badge bg-success">Đã duyệt</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Từ chối</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ $val->created_at }}
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info btn-sm">Xem chi tiết</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>

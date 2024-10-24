@@ -21,50 +21,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Trần B</td>
-                        <td>15,000</td>
-                        <td><a href="https://facebook.com/creatorB">https://facebook.com/creatorB</a></td>
-                        <td><a href="/campaign-detail/1">Chiến dịch A</a></td>
-                        <td class="text-lg-end">
-                            <button class="btn btn-sm btn-success" onclick="openApproveModal('Trần B')">Duyệt</button>
-                            <button class="btn btn-sm btn-danger" onclick="openRejectModal('Trần B')">Từ chối</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Nguyễn C</td>
-                        <td>20,000</td>
-                        <td><a href="https://instagram.com/creatorC">https://instagram.com/creatorC</a></td>
-                        <td><a href="/campaign-detail/2">Chiến dịch B</a></td>
-                        <td class="text-lg-end">
-                            <button class="btn btn-sm btn-success" onclick="openApproveModal('Nguyễn C')">Duyệt</button>
-                            <button class="btn btn-sm btn-danger" onclick="openRejectModal('Nguyễn C')">Từ chối</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Lê D</td>
-                        <td>25,000</td>
-                        <td><a href="https://youtube.com/creatorD">https://youtube.com/creatorD</a></td>
-                        <td><a href="/campaign-detail/1">Chiến dịch A</a></td>
-                        <td class="text-lg-end">
-                            <button class="btn btn-sm btn-success" onclick="openApproveModal('Lê D')">Duyệt</button>
-                            <button class="btn btn-sm btn-danger" onclick="openRejectModal('Lê D')">Từ chối</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Phạm E</td>
-                        <td>30,000</td>
-                        <td><a href="https://tiktok.com/creatorE">https://tiktok.com/creatorE</a></td>
-                        <td><a href="/campaign-detail/3">Chiến dịch C</a></td>
-                        <td class="text-lg-end">
-                            <button class="btn btn-sm btn-success" onclick="openApproveModal('Phạm E')">Duyệt</button>
-                            <button class="btn btn-sm btn-danger" onclick="openRejectModal('Phạm E')">Từ chối</button>
-                        </td>
-                    </tr>
+                    @foreach( $approvalHistories as $key => $val )
+                        <tr>
+                            <td>
+                                {{ $key+1 }}
+                            </td>
+                            <td>{{ $val->creator?->user?->name ?? '' }}</td>
+                            <td>{{ $val->creator?->follower_count ?? '' }}</td>
+                            <td><a href="{{ $val->creator?->platform ?? '' }}"> {{ $val->creator?->platform ?? '' }} </a></td>
+                            <td><a href="{{ route('admin.campaign.detail', $val->campaign_id) }}">
+                                    {{ $val->campaign?->name ?? '' }}
+                                </a></td>
+                            <td class="text-lg-end">
+                                <button class="btn btn-sm btn-success" onclick="openApproveModal('Trần B')">Duyệt
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="openRejectModal('Trần B')">Từ chối
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
