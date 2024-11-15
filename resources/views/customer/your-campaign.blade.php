@@ -1,3 +1,4 @@
+@php use App\Models\Campaign; @endphp
 @extends('customer.layouts.main')
 @section('content')
     <main id="main">
@@ -39,20 +40,32 @@
                                             <th scope="col">Hành động</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                       @foreach( $listCampaigns as $key => $val )
+                                            <tbody>
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $val->campaign?->code ?? '' }}</td>
+                                                <td>{{ $val->campaign?->name ?? '' }}</td>
+                                                <td>{{ $val->campaign?->start_date ?? '' }}</td>
+                                                <td>{{ $val->campaign?->end_date ?? '' }}</td>
                                                 <td>
-                                                        <span class="badge bg-success">Đang diễn ra</span>
+                                                    @switch( $val->status )
+                                                        @case( $val->status === Campaign::STATUS_ACTIVE )
+                                                            <span class="badge bg-primary">Đang hoạt động</span>
+                                                            @break
+                                                        @case( $val->status === Campaign::STATUS_COMPLETED )
+                                                            <span class="badge bg-success">Hoàn thành</span>
+                                                            @break
+                                                        @case( $val->status === Campaign::STATUS_PENDING )
+                                                            <span class="badge bg-warning">Chuẩn bị</span>
+                                                            @break
+                                                    @endswitch
                                                 </td>
                                                 <td>
-                                                    <a href="" class="btn btn-info btn-sm">Xem chi tiết</a>
+                                                    <a href="{{ route('creator.showDetailCampaign', $val->id) }}" class="btn btn-info btn-sm">Xem chi tiết</a>
                                                 </td>
                                             </tr>
-                                        </tbody>
+                                            </tbody>
+                                       @endforeach
                                     </table>
                                 </div>
                             </div>

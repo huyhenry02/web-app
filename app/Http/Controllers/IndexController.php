@@ -10,6 +10,7 @@ use App\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
+use App\Models\CampaignRegistration;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
@@ -50,7 +51,11 @@ class IndexController extends Controller
 
     public function showYourCampaign(): View|Factory|Application
     {
-        return view('customer.your-campaign');
+        $listCampaigns = CampaignRegistration::where('creator_id', auth()->user()->id)->get();
+        return view('customer.your-campaign',
+            [
+                'listCampaigns' => $listCampaigns
+            ]);
     }
 
     public function showRequestCampaign(): View|Factory|Application

@@ -60,10 +60,10 @@ Route::group([
     Route::get('/list-campaign', [IndexController::class, 'showListCampaign'])->name('creator.showListCampaign');
     Route::get('/login', [IndexController::class, 'showLogin'])->name('creator.showLogin');
     Route::get('/register', [IndexController::class, 'showRegister'])->name('creator.showRegister');
-    Route::get('/your-campaign', [IndexController::class, 'showYourCampaign'])->name('creator.showYourCampaign');
-    Route::get('/request-campaign', [IndexController::class, 'showRequestCampaign'])->name('creator.showRequestCampaign');
+    Route::get('/your-campaign', [IndexController::class, 'showYourCampaign'])->name('creator.showYourCampaign')->middleware('auth');
+    Route::get('/request-campaign', [IndexController::class, 'showRequestCampaign'])->name('creator.showRequestCampaign')->middleware('auth');
     Route::get('/contact', [IndexController::class, 'showContact'])->name('creator.showContact');
 
     Route::post('/register', [IndexController::class, 'postRegister'])->name('creator.postRegister');
-    Route::post('/send-request-join', [IndexController::class, 'sendRequestJoin'])->name('creator.sendRequestJoin');
+    Route::post('/send-request-join', [IndexController::class, 'sendRequestJoin'])->name('creator.sendRequestJoin')->middleware('auth');
 });
