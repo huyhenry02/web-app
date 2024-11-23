@@ -36,6 +36,7 @@
                                             <th scope="col">Mã yêu cầu</th>
                                             <th scope="col">Tên chiến dịch</th>
                                             <th scope="col">Trạng thái</th>
+                                            <th scope="col">Loại yêu cầu</th>
                                             <th scope="col">Ngày gửi yêu cầu</th>
                                             <th scope="col">Hành động</th>
                                         </tr>
@@ -58,6 +59,12 @@
                                                         <span class="badge bg-danger">Từ chối</span>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    @if( $val->type == ApprovalHistory::TYPE_REQUEST_JOIN )
+                                                        <span class="badge bg-primary">Tham gia</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Rời khỏi</span>
+                                                    @endif
                                                 <td>
                                                     {{ $val->created_at }}
                                                 </td>

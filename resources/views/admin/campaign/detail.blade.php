@@ -44,6 +44,17 @@
                     </div>
                 </div>
 
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Đối tác</h6>
+                        <p>{{ $campaign->brand ?? '' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Hoa hồng</h6>
+                        <p>{{ isset($campaign->commission) ? number_format($campaign->commission, 0, ',', '.') . ' VND' : '' }}</p>
+                    </div>
+                </div>
+
                 <div class="mb-4">
                     <h6 class="fw-semibold">Mô tả</h6>
                     <p>{{ $campaign->description ?? '' }}</p>
@@ -79,7 +90,7 @@
 
                 <div class="mb-4">
                     <h6 class="fw-semibold">Banner</h6>
-                    <img src="{{ $campaign->file?->file_path ? asset($campaign->file->file_path) : '/assets/images/no_image_custom.jpg' }}" alt="Banner" style="width: 650px; height: 366px; object-fit: cover;">
+                    <img src="{{ $campaign->banner ?? '/assets/images/no_image_custom.jpg' }}" alt="Banner" style="width: 650px; height: 366px; object-fit: cover;">
                 </div>
 
                 <div class="mb-4">
@@ -127,6 +138,16 @@
                                     </span>
                                     <span
                                         class="creator-name">Creator: {{ $approvalHistory->creator?->user?->name ?? 'N/A' }}</span>
+                                    <span class="action">
+                                        @switch( $approvalHistory->type )
+                                            @case( ApprovalHistory::TYPE_REQUEST_OUT )
+                                                <span class="badge badge-danger">rời </span>
+                                                @break
+                                            @case( ApprovalHistory::TYPE_REQUEST_JOIN )
+                                                <span class="badge badge-success">tham gia</span>
+                                                @break
+                                        @endswitch
+                                    </span>
                                     <span
                                         class="date-time">{{ $approvalHistory->created_at->format('d/m/Y H:i') ?? '' }}</span>
                                 </div>

@@ -10,9 +10,9 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a href="{{ route('creator.index') }}" class="active">Trang chủ</a></li>
-                <li><a href="{{ route('creator.showListCampaign') }}">Chiến dịch</a></li>
-                <li><a href="{{ route('creator.showContact') }}">Liên lạc</a></li>
+                <li><a href="{{ route('creator.index') }}" class="{{ request()->routeIs('creator.index') ? 'active' : '' }}">Trang chủ</a></li>
+                <li><a href="{{ route('creator.showListCampaign') }}" class="{{ request()->routeIs('creator.showListCampaign') ? 'active' : '' }}">Chiến dịch</a></li>
+                <li><a href="{{ route('creator.showContact') }}" class="{{ request()->routeIs('creator.showContact') ? 'active' : '' }}">Liên lạc</a></li>
             </ul>
         </nav><!-- .navbar -->
 

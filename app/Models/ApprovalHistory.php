@@ -15,12 +15,15 @@ class ApprovalHistory extends Model
     public const ACTION_APPROVED = 'approved';
     public const ACTION_REJECTED = 'rejected';
     public const ACTION_PENDING = 'pending';
+    public const TYPE_REQUEST_JOIN = 'request_join';
+    public const TYPE_REQUEST_OUT = 'request_out';
 
     protected $fillable = [
         'campaign_id',
         'creator_id',
         'admin_id',
         'action',
+        'type',
         'note',
     ];
 

@@ -1,3 +1,4 @@
+@php use App\Models\ApprovalHistory; @endphp
 @extends('admin.layouts.main')
 @section('content')
     <div class="container-fluid">
@@ -6,7 +7,8 @@
                 <h5 class="card-title fw-semibold mb-4">Danh sách yêu cầu chờ duyệt</h5>
 
                 <div class="mb-4">
-                    <h6 class="fw-semibold">Tổng số yêu cầu chờ duyệt: <span id="total-requests">{{ $approvalHistories->count() ?? 0 }}</span></h6>
+                    <h6 class="fw-semibold">Tổng số yêu cầu chờ duyệt: <span
+                            id="total-requests">{{ $approvalHistories->count() ?? 0 }}</span></h6>
                 </div>
 
                 <table class="table table-bordered table-hover">
@@ -16,6 +18,7 @@
                         <th scope="col">Tên Creator</th>
                         <th scope="col">Số lượng người theo dõi</th>
                         <th scope="col">Liên kết mạng xã hội</th>
+                        <th scope="col">Loại yêu cầu</th>
                         <th scope="col">Chiến dịch</th>
                         <th scope="col" class="text-lg-end">Hành động</th>
                     </tr>
@@ -28,10 +31,20 @@
                             </td>
                             <td>{{ $val->creator?->user?->name ?? '' }}</td>
                             <td>{{ $val->creator?->follower_count ?? '' }}</td>
-                            <td><a href="{{ $val->creator?->platform ?? '' }}"> {{ $val->creator?->platform ?? '' }} </a></td>
-                            <td><a href="{{ route('admin.campaign.detail', $val->campaign_id) }}">
+                            <td>
+                                <a href="{{ $val->creator?->platform ?? '' }}"> {{ $val->creator?->platform ?? '' }} </a>
+                            </td>
+                            <td>
+                                @if( $val->type === ApprovalHistory::TYPE_REQUEST_JOIN )
+                                    <span class="badge bg-primary">Yêu cầu tham gia</span>
+                                @else
+                                    <span class="badge bg-danger">Yêu cầu rời khỏi</span>
+                            @endif
+                            <td>
+                                <a href="{{ route('admin.campaign.detail', $val->campaign_id) }}">
                                     {{ $val->campaign?->name ?? '' }}
-                                </a></td>
+                                </a>
+                            </td>
                             <td class="text-lg-end">
                                 <button class="btn btn-sm btn-success"
                                         onclick="openApproveModal('{{ $val->creator?->user?->name ?? '' }}', {{ $val->id }})">

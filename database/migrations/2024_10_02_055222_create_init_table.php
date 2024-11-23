@@ -27,6 +27,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->nullable();
+            $table->string('brand');
+            $table->integer('commission');
             $table->text('description')->nullable();
             $table->text('content')->nullable();
             $table->date('start_date');
@@ -53,6 +55,7 @@ return new class extends Migration
             $table->unsignedBigInteger('creator_id');
             $table->unsignedBigInteger('admin_id');
             $table->enum('action', ['approved', 'rejected', 'pending'])->default('pending');
+            $table->enum('type', ['request_join', 'request_out']);
             $table->text('note')->nullable();
             $table->timestamps();
         });

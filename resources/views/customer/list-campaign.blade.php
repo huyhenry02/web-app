@@ -23,7 +23,18 @@
         <!-- ======= Our Projects Section ======= -->
         <section id="projects" class="projects">
             <div class="container" data-aos="fade-up">
-
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm chiến dịch...">
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <select id="sortSelect" class="form-select w-auto d-inline-block">
+                            <option value="default">Sắp xếp</option>
+                            <option value="asc">Hoa hồng tăng dần</option>
+                            <option value="desc">Hoa hồng giảm dần</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
                      data-portfolio-sort="original-order">
 
@@ -43,7 +54,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div><!-- End Projects Item -->
+                            </div>
                         @endforeach
 
                     </div><!-- End Projects Container -->
@@ -74,6 +85,30 @@
 
     </style>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const sortSelect = document.getElementById('sortSelect');
+            const campaignContainer = document.querySelector('.portfolio-container');
+
+            function fetchCampaigns() {
+                const query = searchInput.value;
+                const sort = sortSelect.value;
+
+                fetch(`{{ route('campaign.search') }}?query=${query}&sort=${sort}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        campaignContainer.innerHTML = data.html;
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            searchInput.addEventListener('input', fetchCampaigns);
+            sortSelect.addEventListener('change', fetchCampaigns);
+        });
         const ctx = document.getElementById('projectsChart').getContext('2d');
         const projectsChart = new Chart(ctx, {
             type: 'bar', // You can also use 'line', 'pie', etc.

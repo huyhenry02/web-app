@@ -38,7 +38,7 @@
 
                     <div class="form-group mb-3">
                         <label for="fileInput" class="form-label">Banner</label>
-                        <input type="file" class="form-control" id="fileInput" accept="image/*" name="file" multiple>
+                        <input type="file" class="form-control" id="fileInput" accept="image/*" name="banner" multiple>
                         <div id="filePreview" class="mt-3">
                         </div>
                     </div>
@@ -46,6 +46,16 @@
                         <label for="followerRequired" class="form-label">Số lượng người theo dõi yêu cầu</label>
                         <input type="number" class="form-control" id="followerRequired"
                                placeholder="Nhập số lượng người theo dõi yêu cầu" name="follower_required" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="brand" class="form-label">Nhãn hàng</label>
+                        <input type="text" class="form-control" id="brand"
+                               placeholder="Nhãn hàng" name="brand" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="commission" class="form-label">Hoa hồng</label>
+                        <input type="number" class="form-control" id="commission"
+                               placeholder="Hoa hồng" name="commission" required>
                     </div>
 
                     <div class="form-group form-check mb-3">

@@ -60,8 +60,8 @@ class CampaignController extends Controller
             $input = $request->all();
             $input['created_by_id'] = auth()->id();
             $input['blacklist_excluded'] = $request->has('blacklist_excluded') ? 1 : 0;
-            if ($request->hasFile('file')) {
-                $input['banner'] = $this->handleUploadImage($request->file('file'));
+            if ($request->hasFile('banner')) {
+                $input['banner'] = $this->handleUploadImage($request->file('banner'));
             }
             $campaign = new Campaign();
             $campaign->fill($input);
@@ -112,9 +112,8 @@ class CampaignController extends Controller
         }
     }
 
-    public function handleUploadImage($request): string
+    public function handleUploadImage($image): string
     {
-        $image = $request->file('image');
         $imageName = time() . '.' . $image->getClientOriginalExtension();
         $imagePath = $image->storePubliclyAs('images/banners', $imageName);
         return asset('storage/' . $imagePath);
@@ -146,19 +145,36 @@ class CampaignController extends Controller
         }
     }
 
-    public function approveRequest(Request $request): JsonResponse
+    public function approveRequest(Request $request)
     {
-        $approval = ApprovalHistory::find($request->id);
-        $approval->action = ApprovalHistory::ACTION_APPROVED;
-        $approval->save();
+        try {
+            DB::beginTransaction();
+            $approval = ApprovalHistory::find($request->id);
+            $approval->action = ApprovalHistory::ACTION_APPROVED;
+            $approval->save();
 
-        $inputCampaignRegistration['campaign_id'] = $approval->campaign_id;
-        $inputCampaignRegistration['creator_id'] = $approval->creator_id;
-        $campaignRegistration = new CampaignRegistration();
-        $campaignRegistration->fill($inputCampaignRegistration);
-        $campaignRegistration->save();
+            $type = $approval->type;
 
-        return response()->json(['success' => 'Yêu cầu đã được duyệt']);
+            switch ($type) {
+                case ApprovalHistory::TYPE_REQUEST_JOIN:
+                    $campaignRegistration = new CampaignRegistration();
+                    $campaignRegistration->campaign_id = $approval->campaign_id;
+                    $campaignRegistration->creator_id = $approval->creator_id;
+                    $campaignRegistration->save();
+                    break;
+                case ApprovalHistory::TYPE_REQUEST_OUT:
+                    $campaignRegistration = CampaignRegistration::where('campaign_id', $approval->campaign_id)
+                        ->where('creator_id', $approval->creator_id)
+                        ->first();
+                    $campaignRegistration->delete();
+                    break;
+            }
+            DB::commit();
+            return response()->json(['success' => 'Yêu cầu đã được duyệt']);
+        }catch (Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+        }
     }
 
     public function rejectRequest(Request $request): JsonResponse

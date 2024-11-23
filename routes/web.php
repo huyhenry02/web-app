@@ -55,6 +55,7 @@ Route::group([
 Route::group([
     'prefix' => 'creator',
 ], function () {
+    Route::get('/campaigns/search', [IndexController::class, 'search'])->name('campaign.search');
     Route::get('/index', [IndexController::class, 'showIndex'])->name('creator.index');
     Route::get('/detail-campaign/{model}', [IndexController::class, 'showDetailCampaign'])->name('creator.showDetailCampaign');
     Route::get('/list-campaign', [IndexController::class, 'showListCampaign'])->name('creator.showListCampaign');
@@ -65,5 +66,5 @@ Route::group([
     Route::get('/contact', [IndexController::class, 'showContact'])->name('creator.showContact');
 
     Route::post('/register', [IndexController::class, 'postRegister'])->name('creator.postRegister');
-    Route::post('/send-request-join', [IndexController::class, 'sendRequestJoin'])->name('creator.sendRequestJoin')->middleware('auth');
+    Route::post('/send-request', [IndexController::class, 'sendRequest'])->name('creator.sendRequest')->middleware('auth');
 });

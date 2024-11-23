@@ -20,6 +20,8 @@ class CampaignSeeder extends Seeder
             Campaign::create([
                 'name' => $item->name,
                 'code' => $item->code,
+                'brand' => $item->brand,
+                'commission' => $item->commission,
                 'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet neque non nisi euismod aliquam. Sed vulputate velit at leo sollicitudin, vel tincidunt nunc aliquam. Quisque sit amet tortor et arcu gravida sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus sed diam et nisi tincidunt auctor non a eros. Integer ut purus nec justo euismod vehicula. Proin lacinia dui non erat varius, ac ultrices lorem commodo. Nulla facilisi. ',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet neque non nisi euismod aliquam. Sed vulputate velit at leo sollicitudin, vel tincidunt nunc aliquam. Quisque sit amet tortor et arcu gravida sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus sed diam et nisi tincidunt auctor non a eros. Integer ut purus nec justo euismod vehicula. Proin lacinia dui non erat varius, ac ultrices lorem commodo. Nulla facilisi. ',
                 'start_date' => $item->start_date,

@@ -20,8 +20,8 @@ class CampaignRegistrationSeeder extends Seeder
             CampaignRegistration::create([
                 'campaign_id' => $item->campaign_id,
                 'creator_id' => $item->creator_id,
-                'created_at' => $item->created_at,
-                'updated_at' => $item->updated_at,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

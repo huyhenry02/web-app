@@ -25,8 +25,8 @@ class CreatorSeeder extends Seeder
                 'follower_count' => $item->follower_count,
                 'platform' => $item->platform,
                 'status' => $item->status,
-                'created_at' => $item->created_at,
-                'updated_at' => $item->updated_at,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

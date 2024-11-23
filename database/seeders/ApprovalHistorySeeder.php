@@ -22,8 +22,8 @@ class ApprovalHistorySeeder extends Seeder
                 'creator_id' => $item->creator_id,
                 'admin_id' => $item->admin_id,
                 'action' => $item->action,
-                'created_at' => $item->created_at,
-                'updated_at' => $item->updated_at,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

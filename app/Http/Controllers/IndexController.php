@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Creator;
 use App\Models\Campaign;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use App\Models\CampaignRegistration;
@@ -24,9 +25,11 @@ class IndexController extends Controller
 
     public function showDetailCampaign(Campaign $model): View|Factory|Application
     {
+        $checkJoin = CampaignRegistration::where('campaign_id', $model->id)->where('creator_id', auth()->user()->creator->id)->first();
         return view('customer.detail-campaign',
             [
-                'model' => $model
+                'model' => $model,
+                'checkJoin' => $checkJoin
             ]);
     }
 
@@ -51,7 +54,7 @@ class IndexController extends Controller
 
     public function showYourCampaign(): View|Factory|Application
     {
-        $listCampaigns = CampaignRegistration::where('creator_id', auth()->user()->id)->get();
+        $listCampaigns = CampaignRegistration::where('creator_id', auth()->user()->creator->id)->get();
         return view('customer.your-campaign',
             [
                 'listCampaigns' => $listCampaigns
@@ -60,7 +63,7 @@ class IndexController extends Controller
 
     public function showRequestCampaign(): View|Factory|Application
     {
-        $approvalHistories = ApprovalHistory::where('creator_id', auth()->user()->id)->get();
+        $approvalHistories = ApprovalHistory::where('creator_id', auth()->user()->creator->id)->get();
         return view('customer.request-campaign',
         [
             'approvalHistories' => $approvalHistories
@@ -71,6 +74,30 @@ class IndexController extends Controller
     {
         return view('customer.contact');
     }
+
+    public function search(Request $request): JsonResponse
+    {
+        $query = $request->get('query', '');
+        $sort = $request->get('sort', 'default');
+
+        $campaigns = Campaign::query()
+            ->when($query, function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%")
+                    ->orWhere('code', 'like', "%{$query}%");
+            })
+            ->when($sort === 'asc', function ($q) {
+                $q->orderBy('commission', 'asc');
+            })
+            ->when($sort === 'desc', function ($q) {
+                $q->orderBy('commission', 'desc');
+            })
+            ->get();
+
+        $html = view('customer.partials.campaigns-list', compact('campaigns'))->render();
+
+        return response()->json(['html' => $html]);
+    }
+
 
     public function postRegister(Request $request): RedirectResponse
     {
@@ -97,12 +124,12 @@ class IndexController extends Controller
         }
     }
 
-    public function sendRequestJoin(Request $request): RedirectResponse
+    public function sendRequest(Request $request): RedirectResponse
     {
         try {
             DB::beginTransaction();
             $input = $request->all();
-            $input['creator_id'] = auth()->user()->id;
+            $input['creator_id'] = auth()->user()->creator->id;
             $input['admin_id'] = 1;
             $input['status'] = Campaign::STATUS_PENDING;
             $approvalHistory = new ApprovalHistory();
