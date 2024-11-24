@@ -53,6 +53,23 @@ class CampaignController extends Controller
         return view('admin.campaign.update', ['campaign' => $model]);
     }
 
+    public function search(Request $request): JsonResponse
+    {
+        $query = $request->input('q');
+        $campaigns = Campaign::query()
+            ->where('name', 'like', '%' . $query . '%')
+            ->orWhere('code', 'like', '%' . $query . '%')
+            ->orWhereHas('createdBy', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->get();
+
+        return response()->json([
+            'html' => view('admin.campaign.partials.campaign_table', compact('campaigns'))->render(),
+        ]);
+    }
+
+
     public function create(Request $request): RedirectResponse
     {
         DB::beginTransaction();

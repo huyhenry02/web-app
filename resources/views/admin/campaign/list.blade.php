@@ -8,6 +8,9 @@
                     <h3 class="card-title">Danh sách chiến dịch</h3>
                     <a href="{{ route('admin.campaign.show_create') }}" class="btn btn-primary">Thêm mới</a>
                 </div>
+                <div class="mb-3">
+                    <input type="text" id="search-input" class="form-control d-inline-block" placeholder="Tìm kiếm..." style="width: 300px;">
+                </div>
 
                 <table class="table table-bordered table-hover">
                     <thead class="thead-light">
@@ -83,4 +86,23 @@
             width: 135px;
         }
     </style>
+    <script>
+        document.getElementById('search-input').addEventListener('input', function () {
+            const query = this.value;
+
+            fetch(`{{ route('admin.campaign.search') }}?q=${query}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.html) {
+                        document.querySelector('table tbody').innerHTML = data.html;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+
 @endsection

@@ -32,6 +32,8 @@ Route::group([
         Route::get('/create', [CampaignController::class, 'show_create'])->name('admin.campaign.show_create');
         Route::get('/detail/{model}', [CampaignController::class, 'show_detail'])->name('admin.campaign.detail');
         Route::get('/update/{model}', [CampaignController::class, 'show_update'])->name('admin.campaign.show_update');
+        Route::get('/admin/campaigns/search', [CampaignController::class, 'search'])->name('admin.campaign.search');
+
 
         Route::post('/create', [CampaignController::class, 'create'])->name('admin.campaign.create');
         Route::get('/delete/{model}', [CampaignController::class, 'delete'])->name('admin.campaign.delete');
