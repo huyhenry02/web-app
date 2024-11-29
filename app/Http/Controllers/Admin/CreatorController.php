@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use App\Models\CampaignRegistration;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
@@ -31,6 +32,15 @@ class CreatorController extends Controller
         return view('admin.creator.list', [
             'creators' => $creators,
             'count' => $count,
+        ]);
+    }
+
+    public function showDetail(Creator $creator): View|Factory|Application
+    {
+        $ownerCampaigns = CampaignRegistration::where('creator_id', $creator->id)->get();
+        return view('admin.creator.detail', [
+            'creator' => $creator,
+            'ownerCampaigns' => $ownerCampaigns,
         ]);
     }
 

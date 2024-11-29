@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CreatorController;
 use App\Http\Controllers\Admin\CampaignController;
@@ -49,6 +49,7 @@ Route::group([
     ], function () {
         Route::get('/blacklist', [CreatorController::class, 'show_blacklist'])->name('admin.creator.blacklist');
         Route::get('/list', [CreatorController::class, 'show_list'])->name('admin.creator.list');
+        Route::get('/detail/{creator}', [CreatorController::class, 'showDetail'])->name('admin.creator.detail');
 
         Route::post('/ban-creators', [CreatorController::class, 'actionBanCreators'])->name('admin.creator.ban.multiple');
         Route::post('/restored-creators', [CreatorController::class, 'actionRestoreCreators'])->name('admin.creator.restore.multiple');
@@ -57,16 +58,16 @@ Route::group([
 Route::group([
     'prefix' => 'creator',
 ], function () {
-    Route::get('/campaigns/search', [IndexController::class, 'search'])->name('campaign.search');
-    Route::get('/index', [IndexController::class, 'showIndex'])->name('creator.index');
-    Route::get('/detail-campaign/{model}', [IndexController::class, 'showDetailCampaign'])->name('creator.showDetailCampaign');
-    Route::get('/list-campaign', [IndexController::class, 'showListCampaign'])->name('creator.showListCampaign');
-    Route::get('/login', [IndexController::class, 'showLogin'])->name('creator.showLogin');
-    Route::get('/register', [IndexController::class, 'showRegister'])->name('creator.showRegister');
-    Route::get('/your-campaign', [IndexController::class, 'showYourCampaign'])->name('creator.showYourCampaign')->middleware('auth');
-    Route::get('/request-campaign', [IndexController::class, 'showRequestCampaign'])->name('creator.showRequestCampaign')->middleware('auth');
-    Route::get('/contact', [IndexController::class, 'showContact'])->name('creator.showContact');
+    Route::get('/campaigns/search', [RequestController::class, 'search'])->name('campaign.search');
+    Route::get('/index', [RequestController::class, 'showIndex'])->name('creator.index');
+    Route::get('/detail-campaign/{model}', [RequestController::class, 'showDetailCampaign'])->name('creator.showDetailCampaign')->middleware('auth');
+    Route::get('/list-campaign', [RequestController::class, 'showListCampaign'])->name('creator.showListCampaign');
+    Route::get('/login', [RequestController::class, 'showLogin'])->name('creator.showLogin');
+    Route::get('/register', [RequestController::class, 'showRegister'])->name('creator.showRegister');
+    Route::get('/your-campaign', [RequestController::class, 'showYourCampaign'])->name('creator.showYourCampaign')->middleware('auth');
+    Route::get('/request-campaign', [RequestController::class, 'showRequestCampaign'])->name('creator.showRequestCampaign')->middleware('auth');
+    Route::get('/contact', [RequestController::class, 'showContact'])->name('creator.showContact');
 
-    Route::post('/register', [IndexController::class, 'postRegister'])->name('creator.postRegister');
-    Route::post('/send-request', [IndexController::class, 'sendRequest'])->name('creator.sendRequest')->middleware('auth');
+    Route::post('/register', [RequestController::class, 'postRegister'])->name('creator.postRegister');
+    Route::post('/send-request', [RequestController::class, 'sendRequest'])->name('creator.sendRequest')->middleware('auth');
 });

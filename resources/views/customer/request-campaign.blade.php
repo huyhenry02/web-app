@@ -69,7 +69,7 @@
                                                     {{ $val->created_at }}
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="btn btn-info btn-sm">Xem chi tiết</a>
+                                                    <a href="{{ route('creator.showDetailCampaign', $val->campaign_id) }}" class="btn btn-info btn-sm">Xem chi tiết</a>
                                                 </td>
                                             </tr>
                                         @endforeach

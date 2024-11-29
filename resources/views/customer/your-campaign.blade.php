@@ -61,7 +61,7 @@
                                                     @endswitch
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('creator.showDetailCampaign', $val->id) }}" class="btn btn-info btn-sm">Xem chi tiết</a>
+                                                    <a href="{{ route('creator.showDetailCampaign', $val->campaign_id) }}" class="btn btn-info btn-sm">Xem chi tiết</a>
                                                 </td>
                                             </tr>
                                             </tbody>

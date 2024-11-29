@@ -57,7 +57,9 @@
 
                 <div class="mb-4">
                     <h6 class="fw-semibold">Mô tả</h6>
-                    <p>{{ $campaign->description ?? '' }}</p>
+                    <p>
+                        {!! $campaign->description ?? '' !!}
+                    </p>
                 </div>
 
                 <div class="mb-4">

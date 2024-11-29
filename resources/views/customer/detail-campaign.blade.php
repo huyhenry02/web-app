@@ -52,10 +52,7 @@
                     <div class="col-lg-8">
                         <img src="{{ $model->banner }}" alt="" class="img-fluid services-img" width="1024" height="768">
                         <p>
-                            {{ $model->description ?? ''}}
-                        </p>
-                        <p>
-                            {{ $model->description ?? ''}}
+                            {!! $model->description ?? '' !!}
                         </p>
                     </div>
 

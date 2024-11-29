@@ -27,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($creators as $key => $creator)
+                    @foreach( $creators as $key => $creator )
                         <tr>
                             <td>
                                 <input type="checkbox" class="creatorCheckbox" value="{{ $creator->id }}"
@@ -40,7 +40,7 @@
                                    target="_blank">{{ $creator->platform ?? '' }}</a></td>
                             <td>{{ $creator->platform ?? '' }}</td>
                             <td>
-                                <a href="/creator-detail/1" class="btn btn-sm btn-info">Xem chi tiết</a>
+                                <a href="{{ route('admin.creator.detail', $creator->id) }}" class="btn btn-sm btn-info">Xem chi tiết</a>
                                 <button class="btn btn-sm btn-danger" onclick="openBanModalSingle('{{ $creator->id }}', '{{ $creator->user?->name }}')">Cấm</button>
                             </td>
                         </tr>

@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
-                        <h2 data-aos="fade-down">Chào mừng đến với <span>Campaign Pro</span></h2>
+                        <h2 data-aos="fade-down">Chào mừng đến với <span>ECOMOBI</span></h2>
                         <p data-aos="fade-up">Chúng tôi là một tổ chức xã hội không ngừng nỗ lực thực hiện những chiến dịch ý nghĩa, nhằm đem lại tác động tích cực cho cộng đồng.
                             Với sứ mệnh kết nối những người có chung nhiệt huyết, chúng tôi mong muốn bạn cùng chung tay, góp sức trong các hoạt động của mình.
                             Hãy khám phá các chiến dịch hiện có và cùng chúng tôi xây dựng một xã hội tốt đẹp hơn.</p>

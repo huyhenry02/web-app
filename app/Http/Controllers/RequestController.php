@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ApprovalHistory;
 use Exception;
 use App\Models\User;
 use App\Models\Creator;
 use App\Models\Campaign;
 use Illuminate\Http\Request;
+use App\Models\ApprovalHistory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
@@ -16,7 +16,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 
-class IndexController extends Controller
+class RequestController extends Controller
 {
     public function showIndex(): View|Factory|Application
     {
